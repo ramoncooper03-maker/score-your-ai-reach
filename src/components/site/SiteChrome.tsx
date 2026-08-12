@@ -40,7 +40,7 @@ export function SiteHeader() {
                 <Link to="/auth">Sign in</Link>
               </Button>
               <Button asChild size="sm">
-                <Link to="/auth" search={{ mode: "signup" }}>
+                <Link to="/auth">
                   Check My Business
                 </Link>
               </Button>
@@ -73,7 +73,7 @@ export function SiteFooter() {
             <Link to="/auth" className="text-ink-soft hover:text-ink">
               Sign in
             </Link>
-            <Link to="/auth" search={{ mode: "signup" }} className="text-ink-soft hover:text-ink">
+            <Link to="/auth" className="text-ink-soft hover:text-ink">
               Create account
             </Link>
           </nav>
