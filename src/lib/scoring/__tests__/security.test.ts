@@ -39,7 +39,7 @@ describe("validateWebsiteUrl", () => {
     ["http://[::1]", "ip_literal_v6"],
     ["http://intranet.internal", "internal_tld"],
     ["http://box.local", "internal_tld"],
-    ["http://metadata.google.internal", "internal_tld"],
+    ["http://metadata.google.internal", "localhost"],
   ])("rejects %s", (input, reason) => {
     const result = validateWebsiteUrl(input);
     expect(result.ok).toBe(false);

@@ -67,7 +67,8 @@ export function validateWebsiteUrl(input: string | null | undefined): UrlValidat
   if (!raw) return fail("empty", "Enter a website address.");
   if (raw.length > 2000) return fail("too_long", "That website address is too long.");
 
-  const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : `https://${raw}`;
+  // Any explicit scheme is preserved so non-http schemes are rejected below.
+  const candidate = /^[a-z][a-z0-9+.-]*:/i.test(raw) ? raw : `https://${raw}`;
 
   let url: URL;
   try {
@@ -90,12 +91,12 @@ export function validateWebsiteUrl(input: string | null | undefined): UrlValidat
   if (host.startsWith("[") || host.includes(":")) {
     return fail("ip_literal_v6", "IPv6 literal addresses cannot be scanned.");
   }
+  if (BLOCKED_HOSTS.has(host) || host === "localhost") {
+    return fail("localhost", "Local addresses cannot be scanned.");
+  }
   const tld = host.split(".").pop() ?? "";
   if (BLOCKED_TLDS.includes(tld)) {
     return fail("internal_tld", "Internal or reserved domains cannot be scanned.");
-  }
-  if (BLOCKED_HOSTS.has(host) || host === "localhost") {
-    return fail("localhost", "Local addresses cannot be scanned.");
   }
   if (isIPv4Literal(host)) {
     if (isPrivateIPv4(host)) return fail("private_ip", "Private or loopback IP addresses cannot be scanned.");
