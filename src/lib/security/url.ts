@@ -87,23 +87,24 @@ export function validateWebsiteUrl(input: string | null | undefined): UrlValidat
   }
 
   const host = url.hostname.toLowerCase().replace(/\.$/, "");
-  if (!host || !host.includes(".") || BLOCKED_HOSTS.has(host)) {
-    if (BLOCKED_HOSTS.has(host) || host === "localhost") {
-      return fail("localhost", "Local addresses cannot be scanned.");
-    }
-    return fail("invalid", "Enter a full public domain, for example example.com.");
-  }
   if (host.startsWith("[") || host.includes(":")) {
     return fail("ip_literal_v6", "IPv6 literal addresses cannot be scanned.");
-  }
-  if (isIPv4Literal(host)) {
-    if (isPrivateIPv4(host)) return fail("private_ip", "Private or loopback IP addresses cannot be scanned.");
-    return fail("private_ip", "Enter a domain name instead of an IP address.");
   }
   const tld = host.split(".").pop() ?? "";
   if (BLOCKED_TLDS.includes(tld)) {
     return fail("internal_tld", "Internal or reserved domains cannot be scanned.");
   }
+  if (BLOCKED_HOSTS.has(host) || host === "localhost") {
+    return fail("localhost", "Local addresses cannot be scanned.");
+  }
+  if (isIPv4Literal(host)) {
+    if (isPrivateIPv4(host)) return fail("private_ip", "Private or loopback IP addresses cannot be scanned.");
+    return fail("private_ip", "Enter a domain name instead of an IP address.");
+  }
+  if (!host || !host.includes(".")) {
+    return fail("invalid", "Enter a full public domain, for example example.com.");
+  }
+
 
   url.hash = "";
   url.hostname = host;
