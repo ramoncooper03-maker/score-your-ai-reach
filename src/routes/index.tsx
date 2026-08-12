@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "LocalAI Score — Is AI Recommending Your Business?" },
       {
         property: "og:description",
-        content: "Measure your visibility in AI-powered local discovery with standardized, reproducible tests.",
+        content: "LocalAI Score measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
     ],
   }),
