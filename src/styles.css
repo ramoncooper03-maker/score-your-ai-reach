@@ -276,3 +276,73 @@
 @utility section {
   padding-block: 5rem;
 }
+
+/* --- AIeometer motion + surface language ------------------------------- */
+
+/* Scroll reveal: hidden until the observer adds .is-visible. */
+@utility reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility soft-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility hover-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    transform: translate3d(0, -4px, 0);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Warm, bright ambient wash used behind hero and score moments. */
+@utility aurora {
+  background-image:
+    radial-gradient(48rem 30rem at 12% -10%, color-mix(in oklab, var(--brand-signal) 22%, transparent), transparent 70%),
+    radial-gradient(42rem 26rem at 88% 0%, color-mix(in oklab, var(--brand-mint) 20%, transparent), transparent 70%),
+    radial-gradient(38rem 24rem at 60% 100%, color-mix(in oklab, var(--brand-amber) 18%, transparent), transparent 70%);
+}
+
+@utility chapter-number {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
