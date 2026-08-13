@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import logo from "@/assets/aieometer-lockup.png.asset.json";
+import logo from "@/assets/aieometer-logo.png.asset.json";
 import { cn } from "@/lib/utils";
 
 /** AIEO Meter brand lockup: gauge mark + wordmark. */
