@@ -292,8 +292,7 @@ function ReportPage() {
           <p>{VARIABILITY_DISCLOSURE}</p>
           <p className="mt-3">
             Scores in this report were computed in code from the evidence stored for this scan
-            {score ? ` using algorithm ${score.algorithm_version}` : ""}. No language model assigned any score. Full
-            method: <Link to="/methodology" className="text-primary hover:underline">methodology</Link>.
+            {score ? ` using algorithm ${score.algorithm_version}` : ""}. No language model assigned any score.
           </p>
         </Section>
       </div>
