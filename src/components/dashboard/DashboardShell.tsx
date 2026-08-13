@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
-import { CursiveLogo } from "@/components/CursiveLogo";
+import { Wordmark } from "@/components/Wordmark";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -28,7 +28,7 @@ export function DashboardShell({
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-8">
-            <CursiveLogo />
+            <Wordmark />
             <nav className="hidden items-center gap-6 md:flex">
               {LINKS.map((link) => (
                 <Link
