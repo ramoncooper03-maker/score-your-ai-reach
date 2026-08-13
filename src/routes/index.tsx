@@ -691,7 +691,6 @@ function Chapter({
   eyebrow,
   title,
   lede,
-  surface,
   children,
 }: {
   id?: string;
@@ -699,7 +698,6 @@ function Chapter({
   eyebrow: string;
   title: string;
   lede: string;
-  surface?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -707,11 +705,9 @@ function Chapter({
       id={id}
       className={cn(
         "scroll-mt-20",
-        surface
-          ? "border-y border-border/70 wash-sky"
-          : Number(number) % 2 === 0
-            ? "wash-blush"
-            : "wash-mint",
+        Number(number) % 2 === 0
+          ? "border-y border-border/70 bg-background"
+          : "wash-mint",
       )}
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-24">
