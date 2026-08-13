@@ -166,21 +166,22 @@
 
   --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(0.99 0.002 265);
-  --success: oklch(0.55 0.13 158);
+  --success: oklch(0.5 0.13 158);
   --success-foreground: oklch(0.99 0.002 265);
-  --warning: oklch(0.72 0.15 70);
+  --warning: oklch(0.62 0.15 70);
   --warning-foreground: oklch(0.24 0.03 70);
 
   --border: oklch(0.925 0.018 262);
-  --border-strong: oklch(0.86 0.028 262);
-  --input: oklch(0.915 0.006 265);
+  --border-strong: oklch(0.7 0.02 262);
+  --input: oklch(0.66 0.015 265);
   --ring: oklch(0.47 0.16 268);
 
-  --score-critical: oklch(0.56 0.19 25);
-  --score-weak: oklch(0.66 0.16 45);
-  --score-developing: oklch(0.72 0.14 85);
-  --score-strong: oklch(0.58 0.13 200);
-  --score-leading: oklch(0.55 0.13 158);
+  --score-critical: oklch(0.53 0.19 25);
+  --score-weak: oklch(0.57 0.16 45);
+  --score-developing: oklch(0.55 0.12 85);
+  --score-strong: oklch(0.52 0.13 200);
+  --score-leading: oklch(0.52 0.13 158);
+
 
   --brand-signal: oklch(0.62 0.17 245);
   --brand-mint: oklch(0.7 0.1 172);
