@@ -7,6 +7,7 @@ import { VARIABILITY_DISCLOSURE } from "@/lib/content";
 
 const NAV = [
   { to: "/pricing", label: "Pricing" },
+  { to: "/auth", label: "Sign in" },
 ] as const;
 
 export function SiteHeader() {
@@ -34,16 +35,9 @@ export function SiteHeader() {
               <Link to="/dashboard">Dashboard</Link>
             </Button>
           ) : (
-            <>
-              <Button asChild variant="ghost" size="sm">
-                <Link to="/auth">Sign in</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link to="/auth">
-                  Check My Business
-                </Link>
-              </Button>
-            </>
+            <Button asChild size="sm">
+              <Link to="/auth">Check My Business</Link>
+            </Button>
           )}
         </div>
       </div>
