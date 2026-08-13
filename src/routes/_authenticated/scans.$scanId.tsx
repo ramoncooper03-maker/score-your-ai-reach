@@ -3,6 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { AlertTriangle, Check, Circle, Loader2 } from "lucide-react";
 
+import { Meter } from "@/components/aieo/Meter";
+import { ProviderChip } from "@/components/aieo/ProviderChip";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,8 +51,8 @@ function ScanStatusPage() {
     const key = run.provider ?? "Unknown";
     const entry = acc[key] ?? { done: 0, failed: 0, total: 0 };
     entry.total += 1;
-    if (run.status === "succeeded" || run.status === "complete") entry.done += 1;
-    if (run.status === "failed") entry.failed += 1;
+    if (run.status !== "pending" && run.status !== "running") entry.done += 1;
+    if (run.status === "failed" || run.status === "timeout") entry.failed += 1;
     acc[key] = entry;
     return acc;
   }, {});
