@@ -14,13 +14,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Start with a free AI presence check, then choose the Audit or the Blueprint when you want the full picture and a 30-day plan.",
+          "Choose the Audit or the Blueprint for the full picture and a 30-day plan.",
       },
       { property: "og:title", content: "Pricing — AIeometer" },
       {
         property: "og:description",
         content:
-          "Free AI presence check, a $49 Audit, or the $149 Blueprint with implementation guidance.",
+          "A $49 Audit or the $149 Blueprint with implementation guidance.",
       },
     ],
   }),
