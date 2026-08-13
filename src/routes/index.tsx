@@ -211,7 +211,7 @@ function LandingPage() {
       {/* SECTION 1 — hero */}
       <section className="relative overflow-hidden">
         <div
-          className="aurora pointer-events-none absolute inset-0 opacity-70"
+          className="aurora pointer-events-none absolute inset-0 opacity-90"
           aria-hidden="true"
         />
         <div
