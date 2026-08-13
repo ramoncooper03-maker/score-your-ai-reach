@@ -28,13 +28,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIeometer — Does AI Recommend Your Business?" },
+      { title: "AIEO Meter — Does AI Recommend Your Business?" },
       {
         name: "description",
         content:
-          "AIeometer measures how your business shows up across ChatGPT, Gemini and Perplexity, then shows you exactly what to improve. Standardized tests, real evidence.",
+          "AIEO Meter measures how your business shows up across ChatGPT, Gemini and Perplexity, then shows you exactly what to improve. Standardized tests, real evidence.",
       },
-      { property: "og:title", content: "AIeometer — Does AI Recommend Your Business?" },
+      { property: "og:title", content: "AIEO Meter — Does AI Recommend Your Business?" },
       {
         property: "og:description",
         content:
@@ -128,7 +128,7 @@ const FIXES = [
   {
     priority: "Priority 1",
     title: "Clarify your service area",
-    body: "AIeometer found inconsistent location information across important pages.",
+    body: "AIEO Meter found inconsistent location information across important pages.",
   },
   {
     priority: "Priority 2",
@@ -398,12 +398,12 @@ function LandingPage() {
         </Reveal>
       </Chapter>
 
-      {/* SECTION 4 — meet your AIeometer */}
+      {/* SECTION 4 — meet your AIEO Meter */}
       <Chapter
         number="03"
         eyebrow="The instrument"
-        title="Meet your AIeometer."
-        lede="AIeometer tests real discovery questions across supported AI systems and measures what actually appears."
+        title="Meet your AIEO Meter."
+        lede="AIEO Meter tests real discovery questions across supported AI systems and measures what actually appears."
       >
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal className="flex justify-center">

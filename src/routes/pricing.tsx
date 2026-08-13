@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — AIeometer" },
+      { title: "Pricing — AIEO Meter" },
       {
         name: "description",
         content:
           "Choose the Audit or the Blueprint for the full picture and a 30-day plan.",
       },
-      { property: "og:title", content: "Pricing — AIeometer" },
+      { property: "og:title", content: "Pricing — AIEO Meter" },
       {
         property: "og:description",
         content:

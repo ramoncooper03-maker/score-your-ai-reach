@@ -77,27 +77,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AIeometer — Is AI Recommending Your Business?" },
+      { title: "AIEO Meter — Is AI Recommending Your Business?" },
       {
         name: "description",
         content:
-          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+          "AIEO Meter measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "AIeometer — Is AI Recommending Your Business?" },
+      { property: "og:title", content: "AIEO Meter — Is AI Recommending Your Business?" },
       {
         property: "og:description",
         content:
-          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+          "AIEO Meter measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "AIeometer — Is AI Recommending Your Business?" },
+      { name: "twitter:title", content: "AIEO Meter — Is AI Recommending Your Business?" },
       {
         name: "twitter:description",
         content:
-          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+          "AIEO Meter measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
       {
         property: "og:image",

@@ -55,7 +55,7 @@ export interface MeterProps {
 }
 
 /**
- * The AIeometer — the signature score visual used everywhere a score appears.
+ * The AIEO Meter — the signature score visual used everywhere a score appears.
  * An abstract arc (never a speedometer needle) that fills as the value counts up.
  */
 export function Meter({

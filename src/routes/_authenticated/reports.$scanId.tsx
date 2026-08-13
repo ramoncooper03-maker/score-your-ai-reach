@@ -19,13 +19,13 @@ import { READINESS_DIMENSIONS, VISIBILITY_WEIGHTS } from "@/lib/scoring/types";
 export const Route = createFileRoute("/_authenticated/reports/$scanId")({
   head: () => ({
     meta: [
-      { title: "AI visibility report — AIeometer" },
+      { title: "AI visibility report — AIEO Meter" },
       {
         name: "description",
         content:
           "Your AI Visibility Score, AI Readiness Score, competitors observed and prioritized recommendations.",
       },
-      { property: "og:title", content: "AI visibility report — AIeometer" },
+      { property: "og:title", content: "AI visibility report — AIEO Meter" },
       {
         property: "og:description",
         content: "Evidence-backed AI discovery report for your business.",
@@ -104,7 +104,7 @@ function ReportPage() {
                   This report is {scan.status === "partial" ? "partial" : "not finished yet"}.
                 </p>
                 <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-                  Sections stay empty until real evidence exists. AIeometer never fills a report
+                  Sections stay empty until real evidence exists. AIEO Meter never fills a report
                   with placeholder metrics — an unmeasured section is shown as unmeasured.
                 </p>
               </div>
