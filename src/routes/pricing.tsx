@@ -87,7 +87,7 @@ function PricingPage() {
 
       <section className="relative overflow-hidden">
         <div
-          className="aurora pointer-events-none absolute inset-0 opacity-60"
+          className="aurora pointer-events-none absolute inset-0 opacity-85"
           aria-hidden="true"
         />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-16 sm:pt-20">
