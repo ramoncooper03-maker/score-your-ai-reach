@@ -64,9 +64,6 @@ export function SiteFooter() {
             <Link to="/auth" className="text-ink-soft hover:text-ink">
               Sign in
             </Link>
-            <Link to="/auth" className="text-ink-soft hover:text-ink">
-              Create account
-            </Link>
           </nav>
         </div>
         <p className="mt-10 border-t border-border pt-6 text-xs leading-relaxed text-muted-foreground">
