@@ -60,7 +60,7 @@ export interface RunOptions {
 }
 
 /**
- * Every engine AIeometer tests implements this interface.
+ * Every engine AIEO Meter tests implements this interface.
  * Implementations must: validate config, enforce the timeout, surface
  * ProviderError for failures (never throw raw vendor errors), and return the
  * raw payload untouched so scoring stays auditable.

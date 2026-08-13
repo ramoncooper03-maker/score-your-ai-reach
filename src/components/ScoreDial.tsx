@@ -13,7 +13,7 @@ interface ScoreDialProps {
 }
 
 /**
- * Thin wrapper around the AIeometer meter so existing report/landing usages
+ * Thin wrapper around the AIEO Meter meter so existing report/landing usages
  * pick up the new signature visual without changing their call sites.
  */
 export function ScoreDial({ score, label, caption, size = "lg", className }: ScoreDialProps) {

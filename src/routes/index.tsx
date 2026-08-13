@@ -28,13 +28,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIeometer — Does AI Recommend Your Business?" },
+      { title: "AIEO Meter — Does AI Recommend Your Business?" },
       {
         name: "description",
         content:
-          "AIeometer measures how your business shows up across ChatGPT, Gemini and Perplexity, then shows you exactly what to improve. Standardized tests, real evidence.",
+          "AIEO Meter measures how your business shows up across ChatGPT, Gemini and Perplexity, then shows you exactly what to improve. Standardized tests, real evidence.",
       },
-      { property: "og:title", content: "AIeometer — Does AI Recommend Your Business?" },
+      { property: "og:title", content: "AIEO Meter — Does AI Recommend Your Business?" },
       {
         property: "og:description",
         content:
@@ -128,7 +128,7 @@ const FIXES = [
   {
     priority: "Priority 1",
     title: "Clarify your service area",
-    body: "AIeometer found inconsistent location information across important pages.",
+    body: "AIEO Meter found inconsistent location information across important pages.",
   },
   {
     priority: "Priority 2",
@@ -398,12 +398,12 @@ function LandingPage() {
         </Reveal>
       </Chapter>
 
-      {/* SECTION 4 — meet your AIeometer */}
+      {/* SECTION 4 — meet your AIEO Meter */}
       <Chapter
         number="03"
         eyebrow="The instrument"
-        title="Meet your AIeometer."
-        lede="AIeometer tests real discovery questions across supported AI systems and measures what actually appears."
+        title="Meet your AIEO Meter."
+        lede="AIEO Meter tests real discovery questions across supported AI systems and measures what actually appears."
       >
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <Reveal className="flex justify-center">
@@ -598,14 +598,14 @@ function LandingPage() {
         title="Simple pricing. Full picture."
         lede="Every tier uses the same standardized tests and the same deterministic scoring."
       >
-        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <div className="grid gap-6 lg:grid-cols-2 items-stretch">
           {PLANS.map((plan, index) => (
-            <Reveal key={plan.name} delay={index * 90}>
+            <Reveal key={plan.name} delay={index * 90} className="h-full">
               <div
                 className={cn(
                   "soft-card hover-lift flex h-full flex-col p-7 sm:p-8",
                   plan.featured &&
-                    "border-primary/40 shadow-lift ring-1 ring-primary/20 lg:-mt-4 lg:pb-10",
+                    "border-primary/40 shadow-lift ring-1 ring-primary/20",
                 )}
               >
                 <div className="flex items-center justify-between gap-3">

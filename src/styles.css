@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * AIeometer design system.
+ * AIEO Meter design system.
  *
  * Premium analytical SaaS: white surfaces, charcoal type, one restrained
  * indigo accent, generous spacing. The score is the hero visual.
@@ -277,7 +277,7 @@
   padding-block: 5rem;
 }
 
-/* --- AIeometer motion + surface language ------------------------------- */
+/* --- AIEO Meter motion + surface language ------------------------------- */
 
 /* Scroll reveal: hidden until the observer adds .is-visible. */
 @utility reveal {

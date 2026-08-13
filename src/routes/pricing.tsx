@@ -10,13 +10,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — AIeometer" },
+      { title: "Pricing — AIEO Meter" },
       {
         name: "description",
         content:
           "Choose the Audit or the Blueprint for the full picture and a 30-day plan.",
       },
-      { property: "og:title", content: "Pricing — AIeometer" },
+      { property: "og:title", content: "Pricing — AIEO Meter" },
       {
         property: "og:description",
         content:
@@ -104,14 +104,14 @@ function PricingPage() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-2 lg:items-start">
+          <div className="mt-14 grid gap-6 lg:grid-cols-2 items-stretch">
             {PLANS.map((plan, index) => (
-              <Reveal key={plan.name} delay={index * 90}>
+              <Reveal key={plan.name} delay={index * 90} className="h-full">
                 <div
                   className={cn(
                     "soft-card hover-lift flex h-full flex-col p-7 sm:p-8",
                     plan.featured &&
-                      "border-primary/40 shadow-lift ring-1 ring-primary/20 lg:-mt-4 lg:pb-10",
+                      "border-primary/40 shadow-lift ring-1 ring-primary/20",
                   )}
                 >
                   <div className="flex items-center justify-between gap-3">
