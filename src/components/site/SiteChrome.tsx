@@ -53,7 +53,8 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <Wordmark />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Measurement for AI-powered local discovery. Standardized tests, deterministic scoring, auditable evidence.
+              Measurement for AI-powered local discovery. Standardized tests, deterministic scoring,
+              auditable evidence.
             </p>
           </div>
           <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm">

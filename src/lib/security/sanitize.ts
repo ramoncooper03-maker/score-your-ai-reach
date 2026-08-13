@@ -23,12 +23,14 @@ export function stripHtml(input: string, maxLength = 20000): string {
 
 /** Remove control characters that could corrupt stored evidence. */
 export function sanitizeText(input: string, maxLength = 20000): string {
-  return (input ?? "")
-    // eslint-disable-next-line no-control-regex
-    .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
-    .replace(/[ \t]+/g, " ")
-    .trim()
-    .slice(0, maxLength);
+  return (
+    (input ?? "")
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, " ")
+      .replace(/[ \t]+/g, " ")
+      .trim()
+      .slice(0, maxLength)
+  );
 }
 
 /**

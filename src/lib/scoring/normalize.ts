@@ -41,7 +41,8 @@ export function normalizeEntityName(input: string): string {
   let tokens = base.split(" ").filter(Boolean);
 
   while (tokens.length > 1 && FILLER_PREFIXES.has(tokens[0]!)) tokens = tokens.slice(1);
-  while (tokens.length > 1 && LEGAL_SUFFIXES.has(tokens[tokens.length - 1]!)) tokens = tokens.slice(0, -1);
+  while (tokens.length > 1 && LEGAL_SUFFIXES.has(tokens[tokens.length - 1]!))
+    tokens = tokens.slice(0, -1);
 
   return tokens.join(" ");
 }
@@ -58,7 +59,11 @@ export function normalizeHost(input: string): string {
 /**
  * Build the deduplicated alias key set for an entity (name + aliases + host label).
  */
-export function buildAliasKeys(name: string, aliases: readonly string[] = [], website?: string | null): string[] {
+export function buildAliasKeys(
+  name: string,
+  aliases: readonly string[] = [],
+  website?: string | null,
+): string[] {
   const keys = new Set<string>();
   for (const candidate of [name, ...aliases]) {
     const key = normalizeEntityName(candidate);
@@ -100,17 +105,27 @@ export interface MergedEntity {
  * alphabetically so the result is deterministic.
  */
 export function mergeEntities(entities: readonly NamedEntity[]): MergedEntity[] {
-  const groups = new Map<string, { spellings: Map<string, number>; aliasKeys: Set<string>; host: string | null; count: number }>();
+  const groups = new Map<
+    string,
+    { spellings: Map<string, number>; aliasKeys: Set<string>; host: string | null; count: number }
+  >();
 
   for (const entity of entities) {
     const aliasKeys = buildAliasKeys(entity.name, entity.aliases ?? [], entity.website ?? null);
     const key = aliasKeys[0] ?? normalizeEntityName(entity.name);
     if (!key) continue;
 
-    const existing =
-      groups.get(key) ?? { spellings: new Map<string, number>(), aliasKeys: new Set<string>(), host: null, count: 0 };
+    const existing = groups.get(key) ?? {
+      spellings: new Map<string, number>(),
+      aliasKeys: new Set<string>(),
+      host: null,
+      count: 0,
+    };
     existing.count += 1;
-    existing.spellings.set(entity.name.trim(), (existing.spellings.get(entity.name.trim()) ?? 0) + 1);
+    existing.spellings.set(
+      entity.name.trim(),
+      (existing.spellings.get(entity.name.trim()) ?? 0) + 1,
+    );
     for (const aliasKey of aliasKeys) existing.aliasKeys.add(aliasKey);
     const host = normalizeHost(entity.website ?? "");
     if (host && !existing.host) existing.host = host;

@@ -22,7 +22,15 @@ export const REQUESTED_PROVIDERS: readonly string[] = [];
 
 export async function logAudit(
   admin: Client,
-  entry: { actorId: string; action: string; businessId?: string | null; scanId?: string | null; targetType?: string; targetId?: string; metadata?: Record<string, unknown> },
+  entry: {
+    actorId: string;
+    action: string;
+    businessId?: string | null;
+    scanId?: string | null;
+    targetType?: string;
+    targetId?: string;
+    metadata?: Record<string, unknown>;
+  },
 ): Promise<void> {
   const { error } = await admin.from("audit_logs").insert({
     actor_id: entry.actorId,

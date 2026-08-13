@@ -34,7 +34,9 @@ export function SignalBar({
       {label || valueLabel ? (
         <div className="mb-2 flex items-baseline justify-between gap-4">
           {label ? <span className="text-sm text-ink">{label}</span> : null}
-          {valueLabel ? <span className="numeric text-sm text-muted-foreground">{valueLabel}</span> : null}
+          {valueLabel ? (
+            <span className="numeric text-sm text-muted-foreground">{valueLabel}</span>
+          ) : null}
         </div>
       ) : null}
       <div
@@ -46,7 +48,10 @@ export function SignalBar({
         aria-label={label ?? "value"}
       >
         <div
-          className={cn("h-full rounded-full transition-[width] duration-1000 ease-out", TONES[tone])}
+          className={cn(
+            "h-full rounded-full transition-[width] duration-1000 ease-out",
+            TONES[tone],
+          )}
           style={{ width }}
         />
       </div>

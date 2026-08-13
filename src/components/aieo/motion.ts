@@ -19,7 +19,10 @@ export function usePrefersReducedMotion() {
  * Observes an element and reports once it has entered the viewport.
  * Used for scroll-reveal and for starting animations only when visible.
  */
-export function useInView<T extends HTMLElement>(options?: { rootMargin?: string; once?: boolean }) {
+export function useInView<T extends HTMLElement>(options?: {
+  rootMargin?: string;
+  once?: boolean;
+}) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
 
@@ -58,7 +61,10 @@ const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
  * Animates a number from 0 to `target` with requestAnimationFrame.
  * Returns `target` immediately when motion is reduced or animation is off.
  */
-export function useCountUp(target: number | null, options?: { active?: boolean; duration?: number }) {
+export function useCountUp(
+  target: number | null,
+  options?: { active?: boolean; duration?: number },
+) {
   const reduced = usePrefersReducedMotion();
   const active = options?.active ?? true;
   const duration = options?.duration ?? 1400;

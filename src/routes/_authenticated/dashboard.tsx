@@ -18,7 +18,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
       { title: "Dashboard — AIeometer" },
       { name: "description", content: "Your businesses, scans and AI visibility reports." },
       { property: "og:title", content: "Dashboard — AIeometer" },
-      { property: "og:description", content: "Track scans and reports for the businesses you measure." },
+      {
+        property: "og:description",
+        content: "Track scans and reports for the businesses you measure.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -50,7 +53,8 @@ function DashboardPage() {
       toast.success(result.created ? "Scan started." : "Reusing today's scan for this business.");
       void navigate({ to: "/scans/$scanId", params: { scanId: result.scanId } });
     },
-    onError: (error) => toast.error(error instanceof Error ? error.message : "Could not start the scan."),
+    onError: (error) =>
+      toast.error(error instanceof Error ? error.message : "Could not start the scan."),
   });
 
   const businesses = workspace.data?.businesses ?? [];
@@ -76,7 +80,9 @@ function DashboardPage() {
         </div>
       ) : workspace.isError ? (
         <Card>
-          <CardContent className="p-8 text-sm text-destructive">Could not load your workspace. Please refresh.</CardContent>
+          <CardContent className="p-8 text-sm text-destructive">
+            Could not load your workspace. Please refresh.
+          </CardContent>
         </Card>
       ) : businesses.length === 0 ? (
         <Card className="border-dashed">
@@ -85,8 +91,8 @@ function DashboardPage() {
             <div>
               <h2 className="text-lg font-semibold text-ink">Add your first business</h2>
               <p className="mt-2 max-w-lg text-sm text-muted-foreground">
-                We need your business name, website, category, city, state and primary services to build the
-                standardized test set.
+                We need your business name, website, category, city, state and primary services to
+                build the standardized test set.
               </p>
             </div>
             <Button asChild>
@@ -100,7 +106,9 @@ function DashboardPage() {
       ) : (
         <div className="space-y-10">
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">Businesses</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Businesses
+            </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               {businesses.map((business) => (
                 <Card key={business.id} className="border-border/80 shadow-card">
@@ -109,7 +117,9 @@ function DashboardPage() {
                     <p className="mt-1 text-sm text-muted-foreground">
                       {business.category} · {business.city}, {business.state}
                     </p>
-                    <p className="mt-1 text-xs text-muted-foreground">{business.website_host ?? business.website}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {business.website_host ?? business.website}
+                    </p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {business.primary_services.slice(0, 4).map((service) => (
                         <Badge key={service} variant="secondary" className="font-normal">
@@ -132,7 +142,9 @@ function DashboardPage() {
           </section>
 
           <section>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">Recent scans</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              Recent scans
+            </h2>
             {scans.length === 0 ? (
               <p className="mt-4 text-sm text-muted-foreground">No scans yet.</p>
             ) : (
@@ -149,12 +161,16 @@ function DashboardPage() {
                   <tbody>
                     {scans.map((scan) => {
                       const business = businesses.find((item) => item.id === scan.business_id);
-                      const terminal = (TERMINAL_STATUSES as readonly string[]).includes(scan.status);
+                      const terminal = (TERMINAL_STATUSES as readonly string[]).includes(
+                        scan.status,
+                      );
                       return (
                         <tr key={scan.id} className="border-b border-border last:border-0">
                           <td className="px-5 py-4 text-ink">{business?.name ?? "—"}</td>
                           <td className="px-5 py-4">
-                            <Badge variant={statusVariant(scan.status)}>{scan.status.replace(/_/g, " ")}</Badge>
+                            <Badge variant={statusVariant(scan.status)}>
+                              {scan.status.replace(/_/g, " ")}
+                            </Badge>
                           </td>
                           <td className="px-5 py-4 text-muted-foreground">
                             {new Date(scan.created_at).toLocaleDateString()}

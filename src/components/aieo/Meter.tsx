@@ -58,7 +58,14 @@ export interface MeterProps {
  * The AIeometer — the signature score visual used everywhere a score appears.
  * An abstract arc (never a speedometer needle) that fills as the value counts up.
  */
-export function Meter({ score, label, descriptor, size = "md", signals = false, className }: MeterProps) {
+export function Meter({
+  score,
+  label,
+  descriptor,
+  size = "md",
+  signals = false,
+  className,
+}: MeterProps) {
   const { ref, inView } = useInView<HTMLDivElement>();
   const reduced = usePrefersReducedMotion();
   const target = score == null ? null : Math.min(100, Math.max(0, score));
@@ -138,7 +145,10 @@ export function Meter({ score, label, descriptor, size = "md", signals = false, 
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
           <span
-            className={cn("mb-1 font-semibold uppercase tracking-[0.18em] text-muted-foreground", labelSize)}
+            className={cn(
+              "mb-1 font-semibold uppercase tracking-[0.18em] text-muted-foreground",
+              labelSize,
+            )}
           >
             {label}
           </span>
@@ -159,7 +169,10 @@ export function Meter({ score, label, descriptor, size = "md", signals = false, 
         {descriptor ?? (target == null ? "Not measured yet" : BAND_DESCRIPTOR[band])}
       </p>
       <span className="sr-only">
-        {label}: {target == null ? "not measured yet" : `${Math.round(target)} out of 100, ${BAND_DESCRIPTOR[band]}`}
+        {label}:{" "}
+        {target == null
+          ? "not measured yet"
+          : `${Math.round(target)} out of 100, ${BAND_DESCRIPTOR[band]}`}
       </span>
     </div>
   );

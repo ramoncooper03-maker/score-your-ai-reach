@@ -15,14 +15,54 @@ export interface QueryTemplate {
 }
 
 export const QUERY_TEMPLATES: readonly QueryTemplate[] = [
-  { code: "best_local", intentType: "best_in_market", template: "Who are the best {category} in {city}, {state}?", perService: false },
-  { code: "recommend", intentType: "recommendation", template: "Can you recommend a trustworthy {category} in {city}, {state}?", perService: false },
-  { code: "near_me", intentType: "proximity", template: "{category} near {city}, {state} with good reviews", perService: false },
-  { code: "service_intent", intentType: "service_specific", template: "Who should I hire for {service} in {city}, {state}?", perService: true },
-  { code: "service_best", intentType: "service_specific", template: "Best {service} company in {city}, {state}", perService: true },
-  { code: "urgent", intentType: "urgency", template: "I need {service} in {city}, {state} as soon as possible — who should I call?", perService: true },
-  { code: "compare", intentType: "comparison", template: "Compare the top {category} options in {city}, {state}", perService: false },
-  { code: "value", intentType: "price_value", template: "Affordable but reliable {category} in {city}, {state}", perService: false },
+  {
+    code: "best_local",
+    intentType: "best_in_market",
+    template: "Who are the best {category} in {city}, {state}?",
+    perService: false,
+  },
+  {
+    code: "recommend",
+    intentType: "recommendation",
+    template: "Can you recommend a trustworthy {category} in {city}, {state}?",
+    perService: false,
+  },
+  {
+    code: "near_me",
+    intentType: "proximity",
+    template: "{category} near {city}, {state} with good reviews",
+    perService: false,
+  },
+  {
+    code: "service_intent",
+    intentType: "service_specific",
+    template: "Who should I hire for {service} in {city}, {state}?",
+    perService: true,
+  },
+  {
+    code: "service_best",
+    intentType: "service_specific",
+    template: "Best {service} company in {city}, {state}",
+    perService: true,
+  },
+  {
+    code: "urgent",
+    intentType: "urgency",
+    template: "I need {service} in {city}, {state} as soon as possible — who should I call?",
+    perService: true,
+  },
+  {
+    code: "compare",
+    intentType: "comparison",
+    template: "Compare the top {category} options in {city}, {state}",
+    perService: false,
+  },
+  {
+    code: "value",
+    intentType: "price_value",
+    template: "Affordable but reliable {category} in {city}, {state}",
+    perService: false,
+  },
 ];
 
 export interface QueryBuildInput {

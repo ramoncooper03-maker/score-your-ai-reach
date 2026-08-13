@@ -32,7 +32,10 @@ export function ProviderChip({
         className,
       )}
     >
-      <span className={cn("h-2 w-2 shrink-0 rounded-full", DOT[name] ?? "bg-primary")} aria-hidden="true" />
+      <span
+        className={cn("h-2 w-2 shrink-0 rounded-full", DOT[name] ?? "bg-primary")}
+        aria-hidden="true"
+      />
       <span className="font-medium text-ink">{name}</span>
       {note ? <span className="text-xs text-muted-foreground">{note}</span> : null}
       {state === "searching" ? (

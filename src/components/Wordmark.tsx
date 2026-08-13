@@ -5,7 +5,11 @@ import { cn } from "@/lib/utils";
 /** AIeometer mark: an abstract measured arc, not a speedometer needle. */
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <Link to="/" className={cn("group flex items-center gap-2.5", className)} aria-label="AIeometer home">
+    <Link
+      to="/"
+      className={cn("group flex items-center gap-2.5", className)}
+      aria-label="AIeometer home"
+    >
       <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink transition-transform duration-300 group-hover:-translate-y-0.5">
         <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
           <path

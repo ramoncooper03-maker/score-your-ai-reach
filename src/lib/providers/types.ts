@@ -33,7 +33,8 @@ export interface DiscoveryAnswer {
   latencyMs: number;
 }
 
-export type ProviderFailureKind = "auth" | "rate_limit" | "timeout" | "unsupported" | "server" | "unknown";
+export type ProviderFailureKind =
+  "auth" | "rate_limit" | "timeout" | "unsupported" | "server" | "unknown";
 
 export class ProviderError extends Error {
   constructor(
@@ -81,7 +82,9 @@ export interface ProviderRegistry {
 }
 
 /** In-memory registry. Adapters register themselves at server startup. */
-export function createProviderRegistry(adapters: readonly DiscoveryProviderAdapter[] = []): ProviderRegistry {
+export function createProviderRegistry(
+  adapters: readonly DiscoveryProviderAdapter[] = [],
+): ProviderRegistry {
   const map = new Map(adapters.map((adapter) => [adapter.id, adapter]));
   return {
     list: () => [...map.values()],
@@ -111,5 +114,7 @@ export async function runWithRetry(
       clearTimeout(timer);
     }
   }
-  throw lastError instanceof Error ? lastError : new ProviderError("unknown", "Provider call failed");
+  throw lastError instanceof Error
+    ? lastError
+    : new ProviderError("unknown", "Provider call failed");
 }

@@ -31,8 +31,24 @@ export interface UrlValidationFailure {
 export type UrlValidationResult = UrlValidationSuccess | UrlValidationFailure;
 
 const ALLOWED_PORTS = new Set(["", "80", "443"]);
-const BLOCKED_HOSTS = new Set(["localhost", "localhost.localdomain", "ip6-localhost", "metadata.google.internal"]);
-const BLOCKED_TLDS = ["localhost", "local", "internal", "intranet", "lan", "home", "corp", "test", "example", "invalid"];
+const BLOCKED_HOSTS = new Set([
+  "localhost",
+  "localhost.localdomain",
+  "ip6-localhost",
+  "metadata.google.internal",
+]);
+const BLOCKED_TLDS = [
+  "localhost",
+  "local",
+  "internal",
+  "intranet",
+  "lan",
+  "home",
+  "corp",
+  "test",
+  "example",
+  "invalid",
+];
 
 function isPrivateIPv4(host: string): boolean {
   const parts = host.split(".");
@@ -99,13 +115,13 @@ export function validateWebsiteUrl(input: string | null | undefined): UrlValidat
     return fail("internal_tld", "Internal or reserved domains cannot be scanned.");
   }
   if (isIPv4Literal(host)) {
-    if (isPrivateIPv4(host)) return fail("private_ip", "Private or loopback IP addresses cannot be scanned.");
+    if (isPrivateIPv4(host))
+      return fail("private_ip", "Private or loopback IP addresses cannot be scanned.");
     return fail("private_ip", "Enter a domain name instead of an IP address.");
   }
   if (!host || !host.includes(".")) {
     return fail("invalid", "Enter a full public domain, for example example.com.");
   }
-
 
   url.hash = "";
   url.hostname = host;

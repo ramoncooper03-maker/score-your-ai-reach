@@ -54,7 +54,9 @@ export function calculateReadinessScore(signals: ReadinessSignals): ReadinessRes
 }
 
 /** Score band used for presentation only. */
-export function scoreBand(score: number): "critical" | "weak" | "developing" | "strong" | "leading" {
+export function scoreBand(
+  score: number,
+): "critical" | "weak" | "developing" | "strong" | "leading" {
   if (score < 20) return "critical";
   if (score < 40) return "weak";
   if (score < 60) return "developing";

@@ -7,17 +7,18 @@ import { normalizeHost } from "@/lib/scoring/normalize";
 export const getWorkspace = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const [{ data: businesses, error: businessError }, { data: scans, error: scanError }] = await Promise.all([
-      context.supabase
-        .from("businesses")
-        .select("id,name,website,website_host,category,city,state,primary_services,created_at")
-        .order("created_at", { ascending: false }),
-      context.supabase
-        .from("scans")
-        .select("id,business_id,status,scan_type,progress,created_at,completed_at,error_message")
-        .order("created_at", { ascending: false })
-        .limit(25),
-    ]);
+    const [{ data: businesses, error: businessError }, { data: scans, error: scanError }] =
+      await Promise.all([
+        context.supabase
+          .from("businesses")
+          .select("id,name,website,website_host,category,city,state,primary_services,created_at")
+          .order("created_at", { ascending: false }),
+        context.supabase
+          .from("scans")
+          .select("id,business_id,status,scan_type,progress,created_at,completed_at,error_message")
+          .order("created_at", { ascending: false })
+          .limit(25),
+      ]);
 
     if (businessError || scanError) throw new Error("Could not load your workspace.");
 
@@ -83,7 +84,8 @@ export const startScan = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => createScanSchema.parse(data))
   .handler(async ({ data, context }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { assertWithinRateLimit, ensureScan, logAudit } = await import("@/lib/scan-orchestration.server");
+    const { assertWithinRateLimit, ensureScan, logAudit } =
+      await import("@/lib/scan-orchestration.server");
 
     // Ownership is verified through the caller's own RLS-scoped client.
     const { data: business, error } = await context.supabase
@@ -130,8 +132,16 @@ export const getScanDetail = createServerFn({ method: "GET" })
 
     const [{ data: queries }, { data: runs }, { data: scores }] = await Promise.all([
       context.supabase.from("scan_queries").select("*").eq("scan_id", scan.id).order("position"),
-      context.supabase.from("scan_runs").select("id,provider,status,latency_ms,error_code").eq("scan_id", scan.id),
-      context.supabase.from("score_snapshots").select("*").eq("scan_id", scan.id).order("created_at", { ascending: false }).limit(1),
+      context.supabase
+        .from("scan_runs")
+        .select("id,provider,status,latency_ms,error_code")
+        .eq("scan_id", scan.id),
+      context.supabase
+        .from("score_snapshots")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("created_at", { ascending: false })
+        .limit(1),
     ]);
 
     return { scan, queries: queries ?? [], runs: runs ?? [], score: scores?.[0] ?? null };
@@ -149,15 +159,48 @@ export const getReport = createServerFn({ method: "GET" })
 
     if (error || !scan) throw new Error("Scan not found.");
 
-    const [{ data: score }, { data: competitors }, { data: sources }, { data: recommendations }, { data: audit }, { data: version }] =
-      await Promise.all([
-        context.supabase.from("score_snapshots").select("*").eq("scan_id", scan.id).order("created_at", { ascending: false }).limit(1),
-        context.supabase.from("detected_competitors").select("*").eq("scan_id", scan.id).order("mention_count", { ascending: false }),
-        context.supabase.from("run_sources").select("id,url,host,title,is_owned_domain").eq("scan_id", scan.id).limit(200),
-        context.supabase.from("recommendations").select("*").eq("scan_id", scan.id).order("priority", { ascending: false }),
-        context.supabase.from("site_audits").select("*").eq("scan_id", scan.id).order("created_at", { ascending: false }).limit(1),
-        context.supabase.from("report_versions").select("*").eq("scan_id", scan.id).order("version", { ascending: false }).limit(1),
-      ]);
+    const [
+      { data: score },
+      { data: competitors },
+      { data: sources },
+      { data: recommendations },
+      { data: audit },
+      { data: version },
+    ] = await Promise.all([
+      context.supabase
+        .from("score_snapshots")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("created_at", { ascending: false })
+        .limit(1),
+      context.supabase
+        .from("detected_competitors")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("mention_count", { ascending: false }),
+      context.supabase
+        .from("run_sources")
+        .select("id,url,host,title,is_owned_domain")
+        .eq("scan_id", scan.id)
+        .limit(200),
+      context.supabase
+        .from("recommendations")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("priority", { ascending: false }),
+      context.supabase
+        .from("site_audits")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("created_at", { ascending: false })
+        .limit(1),
+      context.supabase
+        .from("report_versions")
+        .select("*")
+        .eq("scan_id", scan.id)
+        .order("version", { ascending: false })
+        .limit(1),
+    ]);
 
     return {
       scan,

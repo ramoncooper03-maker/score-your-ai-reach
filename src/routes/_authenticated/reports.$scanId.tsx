@@ -20,9 +20,16 @@ export const Route = createFileRoute("/_authenticated/reports/$scanId")({
   head: () => ({
     meta: [
       { title: "AI visibility report — AIeometer" },
-      { name: "description", content: "Your AI Visibility Score, AI Readiness Score, competitors observed and prioritized recommendations." },
+      {
+        name: "description",
+        content:
+          "Your AI Visibility Score, AI Readiness Score, competitors observed and prioritized recommendations.",
+      },
       { property: "og:title", content: "AI visibility report — AIeometer" },
-      { property: "og:description", content: "Evidence-backed AI discovery report for your business." },
+      {
+        property: "og:description",
+        content: "Evidence-backed AI discovery report for your business.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -68,8 +75,12 @@ function ReportPage() {
   }
 
   const { scan, score, competitors, sources, recommendations, siteAudit } = reportQuery.data;
-  const visibilityComponents = (score?.visibility_components ?? {}) as Partial<Record<keyof typeof VISIBILITY_WEIGHTS, number>>;
-  const readinessComponents = (score?.readiness_components ?? {}) as Partial<Record<keyof typeof READINESS_DIMENSIONS, number>>;
+  const visibilityComponents = (score?.visibility_components ?? {}) as Partial<
+    Record<keyof typeof VISIBILITY_WEIGHTS, number>
+  >;
+  const readinessComponents = (score?.readiness_components ?? {}) as Partial<
+    Record<keyof typeof READINESS_DIMENSIONS, number>
+  >;
   const complete = scan.status === "complete";
 
   return (
@@ -93,8 +104,8 @@ function ReportPage() {
                   This report is {scan.status === "partial" ? "partial" : "not finished yet"}.
                 </p>
                 <p className="mt-2 max-w-2xl text-sm text-ink-soft">
-                  Sections stay empty until real evidence exists. AIeometer never fills a report with placeholder
-                  metrics — an unmeasured section is shown as unmeasured.
+                  Sections stay empty until real evidence exists. AIeometer never fills a report
+                  with placeholder metrics — an unmeasured section is shown as unmeasured.
                 </p>
               </div>
               <Badge variant="outline">{scan.status.replace(/_/g, " ")}</Badge>
@@ -119,19 +130,32 @@ function ReportPage() {
                 </h2>
                 <dl className="mt-8 grid grid-cols-2 gap-4">
                   {[
-                    ["AI Visibility", score?.visibility_score == null ? "—" : String(score.visibility_score)],
-                    ["AI Readiness", score?.readiness_score == null ? "—" : String(score.readiness_score)],
+                    [
+                      "AI Visibility",
+                      score?.visibility_score == null ? "—" : String(score.visibility_score),
+                    ],
+                    [
+                      "AI Readiness",
+                      score?.readiness_score == null ? "—" : String(score.readiness_score),
+                    ],
                     [
                       "Share of voice",
-                      score?.share_of_voice == null ? "—" : `${Math.round(Number(score.share_of_voice) * 100)}%`,
+                      score?.share_of_voice == null
+                        ? "—"
+                        : `${Math.round(Number(score.share_of_voice) * 100)}%`,
                     ],
                     ["Top competitor", competitors[0]?.canonical_name ?? "—"],
                   ].map(([label, value]) => (
-                    <div key={label} className="rounded-2xl border border-border bg-background/70 p-4 text-left">
+                    <div
+                      key={label}
+                      className="rounded-2xl border border-border bg-background/70 p-4 text-left"
+                    >
                       <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                         {label}
                       </dt>
-                      <dd className="numeric mt-2 truncate text-lg font-semibold text-ink">{value}</dd>
+                      <dd className="numeric mt-2 truncate text-lg font-semibold text-ink">
+                        {value}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -143,15 +167,23 @@ function ReportPage() {
         <Section number="01" title="Your score">
           {score ? (
             <p>
-              Across {String(score.coverage && typeof score.coverage === "object" && "runsScored" in score.coverage ? (score.coverage as { runsScored: number }).runsScored : 0)} completed
-              engine tests, {scan.businesses?.name} scored {score.visibility_score ?? "—"} for AI visibility and{" "}
-              {score.readiness_score ?? "—"} for AI readiness. Both figures are computed in code from the stored
-              evidence for this scan (algorithm {score.algorithm_version}).
+              Across{" "}
+              {String(
+                score.coverage &&
+                  typeof score.coverage === "object" &&
+                  "runsScored" in score.coverage
+                  ? (score.coverage as { runsScored: number }).runsScored
+                  : 0,
+              )}{" "}
+              completed engine tests, {scan.businesses?.name} scored {score.visibility_score ?? "—"}{" "}
+              for AI visibility and {score.readiness_score ?? "—"} for AI readiness. Both figures
+              are computed in code from the stored evidence for this scan (algorithm{" "}
+              {score.algorithm_version}).
             </p>
           ) : (
             <p className="text-muted-foreground">
-              No score snapshot has been calculated for this scan yet. Once provider evidence is recorded, scores appear
-              here with their full component breakdown.
+              No score snapshot has been calculated for this scan yet. Once provider evidence is
+              recorded, scores appear here with their full component breakdown.
             </p>
           )}
         </Section>
@@ -175,7 +207,8 @@ function ReportPage() {
                 label="AI Readiness"
               />
               <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
-                How well the business is prepared to be understood — measured separately from visibility.
+                How well the business is prepared to be understood — measured separately from
+                visibility.
               </p>
             </CardContent>
           </Card>
@@ -183,37 +216,46 @@ function ReportPage() {
 
         <Section number="02" title="What makes up your score">
           <div className="space-y-3">
-            {(Object.keys(VISIBILITY_WEIGHTS) as Array<keyof typeof VISIBILITY_WEIGHTS>).map((key) => {
-              const value = visibilityComponents[key];
-              return (
-                <div key={key} className="flex items-center gap-4">
-                  <SignalBar
-                    label={VISIBILITY_LABELS[key]}
-                    value={Math.round((value ?? 0) * 100)}
-                    valueLabel={value == null ? "unmeasured" : `${Math.round(value * 100)}%`}
-                  />
-                  <span className="numeric w-12 shrink-0 pt-5 text-right text-xs text-muted-foreground">
-                    {Math.round(VISIBILITY_WEIGHTS[key] * 100)}%
-                  </span>
-                </div>
-              );
-            })}
+            {(Object.keys(VISIBILITY_WEIGHTS) as Array<keyof typeof VISIBILITY_WEIGHTS>).map(
+              (key) => {
+                const value = visibilityComponents[key];
+                return (
+                  <div key={key} className="flex items-center gap-4">
+                    <SignalBar
+                      label={VISIBILITY_LABELS[key]}
+                      value={Math.round((value ?? 0) * 100)}
+                      valueLabel={value == null ? "unmeasured" : `${Math.round(value * 100)}%`}
+                    />
+                    <span className="numeric w-12 shrink-0 pt-5 text-right text-xs text-muted-foreground">
+                      {Math.round(VISIBILITY_WEIGHTS[key] * 100)}%
+                    </span>
+                  </div>
+                );
+              },
+            )}
           </div>
         </Section>
 
         <Section number="03" title="How ready your business is">
           <div className="space-y-2">
-            {(Object.keys(READINESS_DIMENSIONS) as Array<keyof typeof READINESS_DIMENSIONS>).map((key) => {
-              const value = readinessComponents[key];
-              return (
-                <div key={key} className="flex items-center justify-between border-b border-border pb-2 text-sm">
-                  <span className="text-ink">{READINESS_LABELS[key]}</span>
-                  <span className="numeric text-muted-foreground">
-                    {value == null ? "unmeasured" : `${Math.round(value * READINESS_DIMENSIONS[key] * 10) / 10} / ${READINESS_DIMENSIONS[key]}`}
-                  </span>
-                </div>
-              );
-            })}
+            {(Object.keys(READINESS_DIMENSIONS) as Array<keyof typeof READINESS_DIMENSIONS>).map(
+              (key) => {
+                const value = readinessComponents[key];
+                return (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between border-b border-border pb-2 text-sm"
+                  >
+                    <span className="text-ink">{READINESS_LABELS[key]}</span>
+                    <span className="numeric text-muted-foreground">
+                      {value == null
+                        ? "unmeasured"
+                        : `${Math.round(value * READINESS_DIMENSIONS[key] * 10) / 10} / ${READINESS_DIMENSIONS[key]}`}
+                    </span>
+                  </div>
+                );
+              },
+            )}
           </div>
         </Section>
 
@@ -224,7 +266,10 @@ function ReportPage() {
             ) : (
               <ul className="space-y-2 text-sm">
                 {competitors.map((competitor) => (
-                  <li key={competitor.id} className="flex items-center justify-between border-b border-border pb-2">
+                  <li
+                    key={competitor.id}
+                    className="flex items-center justify-between border-b border-border pb-2"
+                  >
                     <span className="text-ink">{competitor.canonical_name}</span>
                     <span className="numeric text-muted-foreground">
                       {competitor.recommendation_count} rec · {competitor.mention_count} mentions
@@ -246,7 +291,10 @@ function ReportPage() {
           </Section>
 
           <Section title="Where AI picked you">
-            <Empty>Queries where this business was recommended will be listed here with their evidence snippets.</Empty>
+            <Empty>
+              Queries where this business was recommended will be listed here with their evidence
+              snippets.
+            </Empty>
           </Section>
 
           <Section title="Where AI picked someone else">
@@ -260,7 +308,10 @@ function ReportPage() {
           ) : (
             <ul className="space-y-2 text-sm">
               {sources.slice(0, 25).map((source) => (
-                <li key={source.id} className="flex items-center justify-between gap-4 border-b border-border pb-2">
+                <li
+                  key={source.id}
+                  className="flex items-center justify-between gap-4 border-b border-border pb-2"
+                >
                   <span className="truncate text-ink">{source.title ?? source.url}</span>
                   <span className="shrink-0 text-xs text-muted-foreground">
                     {source.host}
@@ -281,13 +332,14 @@ function ReportPage() {
                 {siteAudit.final_url ?? siteAudit.url} · HTTP {siteAudit.http_status ?? "—"}
               </p>
               <ul className="space-y-2">
-                {(Array.isArray(siteAudit.findings) ? (siteAudit.findings as Array<{ title?: string }>) : []).map(
-                  (finding, index) => (
-                    <li key={index} className="border-b border-border pb-2 text-ink">
-                      {finding.title ?? "Finding"}
-                    </li>
-                  ),
-                )}
+                {(Array.isArray(siteAudit.findings)
+                  ? (siteAudit.findings as Array<{ title?: string }>)
+                  : []
+                ).map((finding, index) => (
+                  <li key={index} className="border-b border-border pb-2 text-ink">
+                    {finding.title ?? "Finding"}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
@@ -295,7 +347,10 @@ function ReportPage() {
 
         <Section number="07" title="Here’s what to fix">
           {recommendations.length === 0 ? (
-            <Empty>Recommendations are generated from measured findings, so none appear until a scan completes.</Empty>
+            <Empty>
+              Recommendations are generated from measured findings, so none appear until a scan
+              completes.
+            </Empty>
           ) : (
             <ol className="space-y-4">
               {recommendations.map((recommendation) => (
@@ -307,7 +362,9 @@ function ReportPage() {
                     </span>
                   </div>
                   {recommendation.detail ? (
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">{recommendation.detail}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                      {recommendation.detail}
+                    </p>
                   ) : null}
                 </li>
               ))}
@@ -317,7 +374,9 @@ function ReportPage() {
 
         <Section number="08" title="Your game plan">
           {recommendations.length === 0 ? (
-            <Empty>The action plan sequences your measured recommendations across the next 30 days.</Empty>
+            <Empty>
+              The action plan sequences your measured recommendations across the next 30 days.
+            </Empty>
           ) : (
             <ol className="space-y-2 text-sm text-ink-soft">
               {recommendations.slice(0, 6).map((recommendation, index) => (
@@ -333,7 +392,8 @@ function ReportPage() {
           <p>{VARIABILITY_DISCLOSURE}</p>
           <p className="mt-3">
             Scores in this report were computed in code from the evidence stored for this scan
-            {score ? ` using algorithm ${score.algorithm_version}` : ""}. No language model assigned any score.
+            {score ? ` using algorithm ${score.algorithm_version}` : ""}. No language model assigned
+            any score.
           </p>
         </Section>
       </div>
@@ -341,7 +401,15 @@ function ReportPage() {
   );
 }
 
-function Section({ number, title, children }: { number?: string; title: string; children: ReactNode }) {
+function Section({
+  number,
+  title,
+  children,
+}: {
+  number?: string;
+  title: string;
+  children: ReactNode;
+}) {
   return (
     <section className="rounded-3xl border border-border bg-card p-7 shadow-card">
       <div className="flex items-center gap-3">

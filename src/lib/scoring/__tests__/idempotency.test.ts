@@ -33,12 +33,17 @@ describe("buildScanIdempotencyKey", () => {
     expect(buildScanIdempotencyKey({ ...base, window: "2026-08-13" })).not.toBe(key);
     expect(buildScanIdempotencyKey({ ...base, scanType: "deep" })).not.toBe(key);
     expect(buildScanIdempotencyKey({ ...base, businessId: "other" })).not.toBe(key);
-    expect(buildScanIdempotencyKey({ ...base, inputs: { services: "drain cleaning" } })).not.toBe(key);
+    expect(buildScanIdempotencyKey({ ...base, inputs: { services: "drain cleaning" } })).not.toBe(
+      key,
+    );
   });
 
   it("ignores empty extra inputs and extra-input ordering", () => {
     expect(buildScanIdempotencyKey({ ...base, inputs: { a: "1", b: "2" } })).toBe(
-      buildScanIdempotencyKey({ ...base, inputs: { b: "2", a: "1", c: null, d: undefined, e: "" } }),
+      buildScanIdempotencyKey({
+        ...base,
+        inputs: { b: "2", a: "1", c: null, d: undefined, e: "" },
+      }),
     );
   });
 

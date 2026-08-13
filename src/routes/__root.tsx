@@ -78,17 +78,37 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "AIeometer — Is AI Recommending Your Business?" },
-      { name: "description", content: "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence." },
+      {
+        name: "description",
+        content:
+          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+      },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "AIeometer — Is AI Recommending Your Business?" },
-      { property: "og:description", content: "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence." },
+      {
+        property: "og:description",
+        content:
+          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "AIeometer — Is AI Recommending Your Business?" },
-      { name: "twitter:description", content: "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/618d7260da93e3fb7a5ddf4460e3dd07/id-preview-0fdbadc0--c9af3cbb-958b-4e7a-bd3f-dba86eee5790.lovable.app-1786501366678.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/618d7260da93e3fb7a5ddf4460e3dd07/id-preview-0fdbadc0--c9af3cbb-958b-4e7a-bd3f-dba86eee5790.lovable.app-1786501366678.png" },
+      {
+        name: "twitter:description",
+        content:
+          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/618d7260da93e3fb7a5ddf4460e3dd07/id-preview-0fdbadc0--c9af3cbb-958b-4e7a-bd3f-dba86eee5790.lovable.app-1786501366678.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/618d7260da93e3fb7a5ddf4460e3dd07/id-preview-0fdbadc0--c9af3cbb-958b-4e7a-bd3f-dba86eee5790.lovable.app-1786501366678.png",
+      },
     ],
     links: [
       {
