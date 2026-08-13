@@ -82,7 +82,7 @@ export function SiteFooter() {
           {VARIABILITY_DISCLOSURE}
         </p>
         <p className="mt-4 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} LocalAI Score. Not affiliated with any AI provider.
+          © {new Date().getFullYear()} AIEO Meter. Not affiliated with any AI provider.
         </p>
       </div>
     </footer>

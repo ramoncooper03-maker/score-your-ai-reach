@@ -8,13 +8,13 @@ import { Card, CardContent } from "@/components/ui/card";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — LocalAI Score" },
+      { title: "Pricing — AIEO Meter" },
       {
         name: "description",
         content:
           "Simple pricing for AI visibility measurement: a one-time diagnostic report, or ongoing tracking for businesses that want to watch the trend.",
       },
-      { property: "og:title", content: "Pricing — LocalAI Score" },
+      { property: "og:title", content: "Pricing — AIEO Meter" },
       { property: "og:description", content: "One-time AI visibility reports and ongoing tracking plans." },
     ],
   }),

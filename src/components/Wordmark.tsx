@@ -8,7 +8,7 @@ export function Wordmark({ className }: { className?: string }) {
       <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-[11px] font-bold text-background">
         AI
       </span>
-      <span className="text-display text-base font-semibold text-ink">LocalAI Score</span>
+      <span className="text-display text-base font-semibold text-ink">AIEO Meter</span>
     </Link>
   );
 }

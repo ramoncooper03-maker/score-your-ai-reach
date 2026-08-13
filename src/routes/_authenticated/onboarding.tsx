@@ -16,9 +16,9 @@ import { validateWebsiteUrl } from "@/lib/security/url";
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
     meta: [
-      { title: "Add your business — LocalAI Score" },
+      { title: "Add your business — AIEO Meter" },
       { name: "description", content: "Tell us about your business so we can build its standardized AI discovery tests." },
-      { property: "og:title", content: "Add your business — LocalAI Score" },
+      { property: "og:title", content: "Add your business — AIEO Meter" },
       { property: "og:description", content: "Business intake for AI visibility measurement." },
       { name: "robots", content: "noindex" },
     ],
