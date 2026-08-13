@@ -7,7 +7,6 @@ import { BAND_DESCRIPTOR, Meter } from "@/components/aieo/Meter";
 import { Reveal } from "@/components/aieo/Reveal";
 import { SignalBar } from "@/components/aieo/SignalBar";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
-import { ScoreDial } from "@/components/ScoreDial";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
