@@ -342,7 +342,6 @@ function LandingPage() {
         eyebrow="The reveal"
         title="But is AI choosing you?"
         lede="Here is what a set of standardized discovery questions can look like when a business has no AI presence."
-        surface
       >
         <Reveal>
           <div className="soft-card overflow-hidden">
@@ -453,7 +452,6 @@ function LandingPage() {
         eyebrow="Under the hood"
         title="One score. A lot behind it."
         lede="Six measured signals make up your AI Visibility Score. Each one is simple on its own."
-        surface
       >
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {COMPONENT_CARDS.map((card, index) => (
@@ -507,7 +505,6 @@ function LandingPage() {
         eyebrow="Then find out why"
         title="Then find out why."
         lede="Your AI Readiness Score measures how well your business is set up to be understood in the first place."
-        surface
       >
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <Reveal className="flex justify-center">
@@ -560,7 +557,6 @@ function LandingPage() {
         eyebrow="Your game plan"
         title="From score to game plan."
         lede="The Blueprint sequences your fixes into four calm weeks of work."
-        surface
       >
         <div className="relative">
           <div
