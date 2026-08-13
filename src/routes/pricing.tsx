@@ -29,16 +29,6 @@ export const Route = createFileRoute("/pricing")({
 
 const PLANS = [
   {
-    name: "AI Presence Check",
-    tag: "Free",
-    price: "$0",
-    cadence: "",
-    summary: "See whether AI knows you exist.",
-    features: ["A first look at your AI presence", "One business", "Plain-language result"],
-    cta: "Check My Business",
-    featured: false,
-  },
-  {
     name: "Audit",
     tag: "One time",
     price: "$49",
