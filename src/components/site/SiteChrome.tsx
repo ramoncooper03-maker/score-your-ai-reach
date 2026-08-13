@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { Wordmark } from "@/components/Wordmark";
+import { CursiveLogo } from "@/components/CursiveLogo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { VARIABILITY_DISCLOSURE } from "@/lib/content";
@@ -16,7 +16,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
-        <Wordmark />
+        <CursiveLogo />
         <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((item) => (
             <Link

@@ -15,6 +15,7 @@
 @theme inline {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-cursive: "Great Vibes", cursive;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -191,6 +192,10 @@
 @utility text-display {
   font-family: var(--font-display);
   letter-spacing: var(--tracking-display);
+}
+
+@utility font-cursive {
+  font-family: var(--font-cursive);
 }
 
 @utility numeric {
