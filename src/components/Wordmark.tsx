@@ -14,7 +14,7 @@ export function Wordmark({ className }: { className?: string }) {
       <img
         src={logo.url}
         alt="AIEO Meter"
-        className="h-9 w-auto transition-transform duration-300 group-hover:-translate-y-0.5"
+        className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-0.5"
       />
     </Link>
   );
