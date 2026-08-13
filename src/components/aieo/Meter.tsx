@@ -47,11 +47,11 @@ export interface MeterProps {
   /** 0–100, or null when nothing has been measured yet. */
   score: number | null;
   label: string;
-  descriptor?: string;
-  size?: keyof typeof SIZES;
+  descriptor?: string | undefined;
+  size?: keyof typeof SIZES | undefined;
   /** Small floating signal dots around the arc — reserved for hero moments. */
-  signals?: boolean;
-  className?: string;
+  signals?: boolean | undefined;
+  className?: string | undefined;
 }
 
 /**
