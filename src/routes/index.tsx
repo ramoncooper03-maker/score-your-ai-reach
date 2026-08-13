@@ -79,7 +79,7 @@ function LandingPage() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/methodology">See How It Works</Link>
+                <Link to="/pricing">See Pricing</Link>
               </Button>
             </div>
             <p className="mt-6 max-w-xl text-xs leading-relaxed text-muted-foreground">{VARIABILITY_DISCLOSURE}</p>
@@ -162,12 +162,6 @@ function LandingPage() {
                 </li>
               ))}
             </ul>
-            <Button asChild variant="link" className="mt-6 px-0">
-              <Link to="/methodology">
-                Read the full methodology
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
 
           <Card className="border-border/80 bg-surface shadow-card">

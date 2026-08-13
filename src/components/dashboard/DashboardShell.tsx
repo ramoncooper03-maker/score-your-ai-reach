@@ -8,7 +8,6 @@ import { useAuth } from "@/hooks/useAuth";
 const LINKS = [
   { to: "/dashboard", label: "Overview" },
   { to: "/onboarding", label: "Add business" },
-  { to: "/methodology", label: "Methodology" },
 ] as const;
 
 export function DashboardShell({

@@ -6,7 +6,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { VARIABILITY_DISCLOSURE } from "@/lib/content";
 
 const NAV = [
-  { to: "/methodology", label: "Methodology" },
   { to: "/pricing", label: "Pricing" },
 ] as const;
 
@@ -64,9 +63,6 @@ export function SiteFooter() {
             </p>
           </div>
           <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm">
-            <Link to="/methodology" className="text-ink-soft hover:text-ink">
-              Methodology
-            </Link>
             <Link to="/pricing" className="text-ink-soft hover:text-ink">
               Pricing
             </Link>
