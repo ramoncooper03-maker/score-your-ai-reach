@@ -652,7 +652,7 @@ function LandingPage() {
       </Chapter>
 
       {/* Closing CTA */}
-      <section className="relative overflow-hidden border-t border-border bg-ink">
+      <section className="relative overflow-hidden bg-ink">
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-8 px-6 py-20 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold text-background sm:text-4xl">
