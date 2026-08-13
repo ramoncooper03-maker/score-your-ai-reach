@@ -10,13 +10,13 @@ import { READINESS_DIMENSIONS, VISIBILITY_WEIGHTS, ALGORITHM_VERSION } from "@/l
 export const Route = createFileRoute("/methodology")({
   head: () => ({
     meta: [
-      { title: "Methodology — How LocalAI Score is calculated" },
+      { title: "Methodology — How AIEO Meter is calculated" },
       {
         name: "description",
         content:
-          "How LocalAI Score works: standardized buyer-intent queries, multiple web-grounded AI engines, stored evidence, and deterministic 0-100 visibility and readiness scoring.",
+          "How AIEO Meter works: standardized buyer-intent queries, multiple web-grounded AI engines, stored evidence, and deterministic 0-100 visibility and readiness scoring.",
       },
-      { property: "og:title", content: "Methodology — How LocalAI Score is calculated" },
+      { property: "og:title", content: "Methodology — How AIEO Meter is calculated" },
       {
         property: "og:description",
         content: "Standardized queries, stored evidence, and scores computed in code — not judged by an AI.",
@@ -64,7 +64,7 @@ function MethodologyPage() {
         </p>
         <h1 className="mt-4 text-4xl font-semibold text-ink sm:text-5xl">Methodology</h1>
         <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-          LocalAI Score is a measurement instrument. It runs a fixed set of buyer-intent questions through supported
+          AIEO Meter is a measurement instrument. It runs a fixed set of buyer-intent questions through supported
           web-grounded AI engines, records exactly what came back, and computes scores from that stored evidence in
           code.
         </p>

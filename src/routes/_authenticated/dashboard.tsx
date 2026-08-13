@@ -15,9 +15,9 @@ import { TERMINAL_STATUSES } from "@/lib/content";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — LocalAI Score" },
+      { title: "Dashboard — AIEO Meter" },
       { name: "description", content: "Your businesses, scans and AI visibility reports." },
-      { property: "og:title", content: "Dashboard — LocalAI Score" },
+      { property: "og:title", content: "Dashboard — AIEO Meter" },
       { property: "og:description", content: "Track scans and reports for the businesses you measure." },
       { name: "robots", content: "noindex" },
     ],
