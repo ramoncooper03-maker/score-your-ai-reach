@@ -3,6 +3,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import type { ReactNode } from "react";
 
+import { BAND_DESCRIPTOR, Meter } from "@/components/aieo/Meter";
+import { Reveal } from "@/components/aieo/Reveal";
+import { SignalBar } from "@/components/aieo/SignalBar";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { ScoreDial } from "@/components/ScoreDial";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getReport } from "@/lib/app.functions";
 import { VARIABILITY_DISCLOSURE } from "@/lib/content";
-import { READINESS_LABELS } from "@/lib/scoring/readiness";
+import { READINESS_LABELS, scoreBand } from "@/lib/scoring/readiness";
 import { READINESS_DIMENSIONS, VISIBILITY_WEIGHTS } from "@/lib/scoring/types";
 
 export const Route = createFileRoute("/_authenticated/reports/$scanId")({
@@ -100,7 +103,45 @@ function ReportPage() {
           </Card>
         ) : null}
 
-        <Section title="Executive summary">
+        <Reveal>
+          <section className="aurora relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-card sm:p-12">
+            <div className="relative flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
+              <Meter
+                score={score?.visibility_score == null ? null : Number(score.visibility_score)}
+                label="Your AI Visibility"
+                size="lg"
+                signals
+              />
+              <div className="max-w-md text-center lg:text-left">
+                <h2 className="text-2xl font-semibold text-ink sm:text-3xl">
+                  {score?.visibility_score == null
+                    ? "No score yet — evidence is still being collected."
+                    : `${BAND_DESCRIPTOR[scoreBand(Number(score.visibility_score))]} — here is what the tests found.`}
+                </h2>
+                <dl className="mt-8 grid grid-cols-2 gap-4">
+                  {[
+                    ["AI Visibility", score?.visibility_score == null ? "—" : String(score.visibility_score)],
+                    ["AI Readiness", score?.readiness_score == null ? "—" : String(score.readiness_score)],
+                    [
+                      "Share of voice",
+                      score?.share_of_voice == null ? "—" : `${Math.round(Number(score.share_of_voice) * 100)}%`,
+                    ],
+                    ["Top competitor", competitors[0]?.canonical_name ?? "—"],
+                  ].map(([label, value]) => (
+                    <div key={label} className="rounded-2xl border border-border bg-background/70 p-4 text-left">
+                      <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        {label}
+                      </dt>
+                      <dd className="numeric mt-2 truncate text-lg font-semibold text-ink">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
+          </section>
+        </Reveal>
+
+        <Section number="01" title="Your score">
           {score ? (
             <p>
               Across {String(score.coverage && typeof score.coverage === "object" && "runsScored" in score.coverage ? (score.coverage as { runsScored: number }).runsScored : 0)} completed
@@ -119,39 +160,40 @@ function ReportPage() {
         <div className="grid gap-6 md:grid-cols-2">
           <Card className="border-border/80 shadow-card">
             <CardContent className="flex flex-col items-center p-8">
-              <ScoreDial score={score?.visibility_score ?? null} label="AI Visibility Score" />
-              <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
+              <Meter
+                score={score?.visibility_score == null ? null : Number(score.visibility_score)}
+                label="AI Visibility"
+              />
+              <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
                 How often the standardized tests actually surfaced this business.
               </p>
             </CardContent>
           </Card>
           <Card className="border-border/80 shadow-card">
             <CardContent className="flex flex-col items-center p-8">
-              <ScoreDial score={score?.readiness_score ?? null} label="AI Readiness Score" />
-              <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
+              <Meter
+                score={score?.readiness_score == null ? null : Number(score.readiness_score)}
+                label="AI Readiness"
+              />
+              <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
                 How well the business is prepared to be understood — measured separately from visibility.
               </p>
             </CardContent>
           </Card>
         </div>
 
-        <Section title="Visibility components">
+        <Section number="02" title="What makes up your score">
           <div className="space-y-3">
             {(Object.keys(VISIBILITY_WEIGHTS) as Array<keyof typeof VISIBILITY_WEIGHTS>).map((key) => {
               const value = visibilityComponents[key];
               return (
                 <div key={key} className="flex items-center gap-4">
-                  <span className="w-56 shrink-0 text-sm text-ink">{VISIBILITY_LABELS[key]}</span>
-                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-muted">
-                    <div
-                      className="h-full rounded-full bg-primary"
-                      style={{ width: `${Math.round((value ?? 0) * 100)}%` }}
-                    />
-                  </div>
-                  <span className="numeric w-24 text-right text-sm text-muted-foreground">
-                    {value == null ? "unmeasured" : `${Math.round(value * 100)}%`}
-                  </span>
-                  <span className="numeric w-12 text-right text-xs text-muted-foreground">
+                  <SignalBar
+                    label={VISIBILITY_LABELS[key]}
+                    value={Math.round((value ?? 0) * 100)}
+                    valueLabel={value == null ? "unmeasured" : `${Math.round(value * 100)}%`}
+                  />
+                  <span className="numeric w-12 shrink-0 pt-5 text-right text-xs text-muted-foreground">
                     {Math.round(VISIBILITY_WEIGHTS[key] * 100)}%
                   </span>
                 </div>
@@ -160,7 +202,7 @@ function ReportPage() {
           </div>
         </Section>
 
-        <Section title="Readiness dimensions">
+        <Section number="03" title="How ready your business is">
           <div className="space-y-2">
             {(Object.keys(READINESS_DIMENSIONS) as Array<keyof typeof READINESS_DIMENSIONS>).map((key) => {
               const value = readinessComponents[key];
@@ -177,7 +219,7 @@ function ReportPage() {
         </Section>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Section title="Observed competitors">
+          <Section number="04" title="Who AI recommended instead">
             {competitors.length === 0 ? (
               <Empty>No competitors have been recorded for this scan.</Empty>
             ) : (
@@ -194,7 +236,7 @@ function ReportPage() {
             )}
           </Section>
 
-          <Section title="Competitive share of voice">
+          <Section title="Your share of voice">
             {score?.share_of_voice == null ? (
               <Empty>Share of voice is calculated once engine evidence exists.</Empty>
             ) : (
@@ -204,16 +246,16 @@ function ReportPage() {
             )}
           </Section>
 
-          <Section title="Query wins">
+          <Section title="Where AI picked you">
             <Empty>Queries where this business was recommended will be listed here with their evidence snippets.</Empty>
           </Section>
 
-          <Section title="Query losses">
+          <Section title="Where AI picked someone else">
             <Empty>Queries where competitors were recommended instead will be listed here.</Empty>
           </Section>
         </div>
 
-        <Section title="Sources & citations">
+        <Section number="05" title="What AI cited">
           {sources.length === 0 ? (
             <Empty>No cited sources have been recorded for this scan.</Empty>
           ) : (
@@ -231,7 +273,7 @@ function ReportPage() {
           )}
         </Section>
 
-        <Section title="Website readiness findings">
+        <Section number="06" title="Your website">
           {!siteAudit ? (
             <Empty>Your website has not been audited in this scan yet.</Empty>
           ) : (
@@ -252,7 +294,7 @@ function ReportPage() {
           )}
         </Section>
 
-        <Section title="Prioritized recommendations">
+        <Section number="07" title="Here’s what to fix">
           {recommendations.length === 0 ? (
             <Empty>Recommendations are generated from measured findings, so none appear until a scan completes.</Empty>
           ) : (
@@ -274,7 +316,7 @@ function ReportPage() {
           )}
         </Section>
 
-        <Section title="30-day action plan">
+        <Section number="08" title="Your game plan">
           {recommendations.length === 0 ? (
             <Empty>The action plan sequences your measured recommendations across the next 30 days.</Empty>
           ) : (
@@ -288,7 +330,7 @@ function ReportPage() {
           )}
         </Section>
 
-        <Section title="Methodology disclosure">
+        <Section title="Method and limits">
           <p>{VARIABILITY_DISCLOSURE}</p>
           <p className="mt-3">
             Scores in this report were computed in code from the evidence stored for this scan
@@ -300,10 +342,13 @@ function ReportPage() {
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({ number, title, children }: { number?: string; title: string; children: ReactNode }) {
   return (
-    <section className="rounded-xl border border-border bg-background p-7">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">{title}</h2>
+    <section className="rounded-3xl border border-border bg-card p-7 shadow-card">
+      <div className="flex items-center gap-3">
+        {number ? <span className="chapter-number">{number}</span> : null}
+        <h2 className="text-base font-semibold text-ink">{title}</h2>
+      </div>
       <div className="mt-5 text-sm leading-relaxed text-ink-soft">{children}</div>
     </section>
   );
