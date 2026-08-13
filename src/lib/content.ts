@@ -1,13 +1,13 @@
 /**
  * Shared presentation copy. Kept in one place so product claims stay accurate
- * and consistent: AIEO Meter never claims a permanent "ChatGPT ranking"
+ * and consistent: AIeometer never claims a permanent "ChatGPT ranking"
  * and never promises that optimization will make an AI recommend a business.
  */
 
-export const BRAND = "AIEO Meter";
+export const BRAND = "AIeometer";
 
 export const VARIABILITY_DISCLOSURE =
-  "AI-generated answers vary between engines, sessions and phrasing. AIEO Meter runs a fixed set of standardized buyer-intent tests and reports what those tests observed at a point in time. It is not a permanent AI ranking and no result can be guaranteed.";
+  "AI-generated answers vary between engines, sessions and phrasing. AIeometer runs a fixed set of standardized buyer-intent tests and reports what those tests observed at a point in time. It is not a permanent AI ranking and no result can be guaranteed.";
 
 export const SCAN_STEPS = [
   { status: "validating", label: "Validating inputs" },

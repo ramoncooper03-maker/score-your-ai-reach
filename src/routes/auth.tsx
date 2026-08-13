@@ -14,10 +14,10 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — AIEO Meter" },
-      { name: "description", content: "Sign in or create your AIEO Meter account to measure your AI visibility." },
-      { property: "og:title", content: "Sign in — AIEO Meter" },
-      { property: "og:description", content: "Access your AIEO Meter dashboard and reports." },
+      { title: "Sign in — AIeometer" },
+      { name: "description", content: "Sign in or create your AIeometer account to measure your AI visibility." },
+      { property: "og:title", content: "Sign in — AIeometer" },
+      { property: "og:description", content: "Access your AIeometer dashboard and reports." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -92,7 +92,7 @@ function AuthPage() {
           </p>
         </div>
         <p className="text-xs text-muted-foreground">
-          AI answers vary. AIEO Meter reports what standardized tests observed — never a permanent ranking.
+          AI answers vary. AIeometer reports what standardized tests observed — never a permanent ranking.
         </p>
       </div>
 

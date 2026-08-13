@@ -15,9 +15,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_authenticated/scans/$scanId")({
   head: () => ({
     meta: [
-      { title: "Scan status — AIEO Meter" },
+      { title: "Scan status — AIeometer" },
       { name: "description", content: "Live status of your AI visibility scan, step by step." },
-      { property: "og:title", content: "Scan status — AIEO Meter" },
+      { property: "og:title", content: "Scan status — AIeometer" },
       { property: "og:description", content: "Follow each stage of your standardized AI discovery scan." },
       { name: "robots", content: "noindex" },
     ],

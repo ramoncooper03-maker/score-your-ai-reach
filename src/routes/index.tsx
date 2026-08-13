@@ -11,16 +11,16 @@ import { VARIABILITY_DISCLOSURE } from "@/lib/content";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AIEO Meter — Is AI Recommending Your Business?" },
+      { title: "AIeometer — Is AI Recommending Your Business?" },
       {
         name: "description",
         content:
-          "AIEO Meter measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+          "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
-      { property: "og:title", content: "AIEO Meter — Is AI Recommending Your Business?" },
+      { property: "og:title", content: "AIeometer — Is AI Recommending Your Business?" },
       {
         property: "og:description",
-        content: "AIEO Meter measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
+        content: "AIeometer measures how your local business appears when AI is asked the questions your customers ask. Standardized tests, deterministic scoring, auditable evidence.",
       },
     ],
   }),
@@ -69,7 +69,7 @@ function LandingPage() {
               Is AI Recommending Your Business—or Your Competitors?
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-              AIEO Meter measures how your business appears when AI is asked the questions your customers might ask.
+              AIeometer measures how your business appears when AI is asked the questions your customers might ask.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button asChild size="lg">
