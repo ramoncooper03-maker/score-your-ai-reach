@@ -701,9 +701,7 @@ function Chapter({
       id={id}
       className={cn(
         "scroll-mt-20",
-        Number(number) % 2 === 0
-          ? "border-y border-border/70 bg-background"
-          : "wash-mint",
+        Number(number) % 2 === 0 ? "bg-background" : "wash-mint",
       )}
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-24">
