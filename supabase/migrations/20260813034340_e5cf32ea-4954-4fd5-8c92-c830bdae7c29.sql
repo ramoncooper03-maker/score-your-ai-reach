@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS business_locations_owner_scoped ON public.business_locations;
+CREATE POLICY business_locations_owner_scoped ON public.business_locations AS RESTRICTIVE FOR ALL TO authenticated USING (private.owns_business(business_id)) WITH CHECK (private.owns_business(business_id));
