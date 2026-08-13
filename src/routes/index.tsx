@@ -167,16 +167,6 @@ const WEEKS = [
 
 const PLANS = [
   {
-    name: "AI Presence Check",
-    tag: "Free",
-    price: "$0",
-    cadence: "",
-    summary: "See whether AI knows you exist.",
-    features: ["A first look at your AI presence", "One business", "Plain-language result"],
-    cta: "Check My Business",
-    featured: false,
-  },
-  {
     name: "Audit",
     tag: "One time",
     price: "$49",
@@ -605,10 +595,10 @@ function LandingPage() {
       <Chapter
         number="09"
         eyebrow="Pricing"
-        title="Start free. Go deeper when you’re ready."
+        title="Simple pricing. Full picture."
         lede="Every tier uses the same standardized tests and the same deterministic scoring."
       >
-        <div className="grid gap-6 lg:grid-cols-3 lg:items-start">
+        <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           {PLANS.map((plan, index) => (
             <Reveal key={plan.name} delay={index * 90}>
               <div

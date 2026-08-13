@@ -14,13 +14,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Start with a free AI presence check, then choose the Audit or the Blueprint when you want the full picture and a 30-day plan.",
+          "Choose the Audit or the Blueprint for the full picture and a 30-day plan.",
       },
       { property: "og:title", content: "Pricing — AIeometer" },
       {
         property: "og:description",
         content:
-          "Free AI presence check, a $49 Audit, or the $149 Blueprint with implementation guidance.",
+          "A $49 Audit or the $149 Blueprint with implementation guidance.",
       },
     ],
   }),
@@ -28,16 +28,6 @@ export const Route = createFileRoute("/pricing")({
 });
 
 const PLANS = [
-  {
-    name: "AI Presence Check",
-    tag: "Free",
-    price: "$0",
-    cadence: "",
-    summary: "See whether AI knows you exist.",
-    features: ["A first look at your AI presence", "One business", "Plain-language result"],
-    cta: "Check My Business",
-    featured: false,
-  },
   {
     name: "Audit",
     tag: "One time",
@@ -106,7 +96,7 @@ function PricingPage() {
               Pricing
             </span>
             <h1 className="mt-5 text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-6xl">
-              Start free. Go deeper when you’re ready.
+              Simple pricing. Full picture.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
               Pay for measurement, not promises. Every tier uses the same standardized tests and the
@@ -114,7 +104,7 @@ function PricingPage() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-start">
+          <div className="mt-14 grid gap-6 lg:grid-cols-2 lg:items-start">
             {PLANS.map((plan, index) => (
               <Reveal key={plan.name} delay={index * 90}>
                 <div
