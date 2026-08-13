@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { CursiveLogo } from "@/components/CursiveLogo";
+import { Wordmark } from "@/components/Wordmark";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { VARIABILITY_DISCLOSURE } from "@/lib/content";
