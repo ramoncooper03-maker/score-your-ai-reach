@@ -183,14 +183,14 @@
   --score-leading: oklch(0.55 0.13 158);
 
   --brand-signal: oklch(0.62 0.17 245);
-  --brand-mint: oklch(0.7 0.14 172);
+  --brand-mint: oklch(0.7 0.1 172);
   --brand-coral: oklch(0.68 0.17 28);
   --brand-amber: oklch(0.79 0.14 82);
   --brand-violet: oklch(0.6 0.18 295);
-  --brand-sky: oklch(0.83 0.09 235);
-  --brand-blush: oklch(0.85 0.08 15);
-  --brand-lilac: oklch(0.83 0.08 300);
-  --brand-butter: oklch(0.9 0.09 95);
+  --brand-sky: oklch(0.83 0.07 235);
+  --brand-blush: oklch(0.85 0.06 15);
+  --brand-lilac: oklch(0.83 0.06 300);
+  --brand-butter: oklch(0.9 0.07 95);
 
 
   --chart-1: oklch(0.47 0.16 268);
@@ -326,32 +326,32 @@
 /* Warm, bright ambient wash used behind hero and score moments. */
 @utility aurora {
   background-image:
-    radial-gradient(46rem 30rem at 10% -12%, color-mix(in oklab, var(--brand-sky) 62%, transparent), transparent 70%),
-    radial-gradient(40rem 26rem at 88% -6%, color-mix(in oklab, var(--brand-blush) 55%, transparent), transparent 70%),
-    radial-gradient(36rem 24rem at 62% 104%, color-mix(in oklab, var(--brand-butter) 55%, transparent), transparent 70%),
-    radial-gradient(34rem 22rem at 34% 62%, color-mix(in oklab, var(--brand-lilac) 40%, transparent), transparent 72%);
+    radial-gradient(46rem 30rem at 10% -12%, color-mix(in oklab, var(--brand-sky) 38%, transparent), transparent 70%),
+    radial-gradient(40rem 26rem at 88% -6%, color-mix(in oklab, var(--brand-blush) 32%, transparent), transparent 70%),
+    radial-gradient(36rem 24rem at 62% 104%, color-mix(in oklab, var(--brand-butter) 30%, transparent), transparent 70%),
+    radial-gradient(34rem 22rem at 34% 62%, color-mix(in oklab, var(--brand-lilac) 24%, transparent), transparent 72%);
 }
 
 /* Soft storybook washes for alternating page sections. */
 @utility wash-sky {
   background-color: var(--color-background);
   background-image:
-    radial-gradient(40rem 24rem at 8% 0%, color-mix(in oklab, var(--brand-sky) 32%, transparent), transparent 72%),
-    radial-gradient(34rem 22rem at 92% 100%, color-mix(in oklab, var(--brand-lilac) 26%, transparent), transparent 72%);
+    radial-gradient(40rem 24rem at 8% 0%, color-mix(in oklab, var(--brand-sky) 20%, transparent), transparent 72%),
+    radial-gradient(34rem 22rem at 92% 100%, color-mix(in oklab, var(--brand-lilac) 16%, transparent), transparent 72%);
 }
 
 @utility wash-blush {
   background-color: var(--color-background);
   background-image:
-    radial-gradient(38rem 24rem at 92% 0%, color-mix(in oklab, var(--brand-blush) 30%, transparent), transparent 72%),
-    radial-gradient(34rem 22rem at 6% 96%, color-mix(in oklab, var(--brand-butter) 26%, transparent), transparent 72%);
+    radial-gradient(38rem 24rem at 92% 0%, color-mix(in oklab, var(--brand-blush) 18%, transparent), transparent 72%),
+    radial-gradient(34rem 22rem at 6% 96%, color-mix(in oklab, var(--brand-butter) 16%, transparent), transparent 72%);
 }
 
 @utility wash-mint {
   background-color: var(--color-background);
   background-image:
-    radial-gradient(38rem 24rem at 12% 4%, color-mix(in oklab, var(--brand-mint) 22%, transparent), transparent 72%),
-    radial-gradient(34rem 22rem at 88% 100%, color-mix(in oklab, var(--brand-sky) 26%, transparent), transparent 72%);
+    radial-gradient(38rem 24rem at 12% 4%, color-mix(in oklab, var(--brand-mint) 14%, transparent), transparent 72%),
+    radial-gradient(34rem 22rem at 88% 100%, color-mix(in oklab, var(--brand-sky) 16%, transparent), transparent 72%);
 }
 
 @utility chapter-number {
