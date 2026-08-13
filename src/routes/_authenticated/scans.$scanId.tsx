@@ -44,13 +44,24 @@ function ScanStatusPage() {
   const currentIndex = scan ? SCAN_STEPS.findIndex((step) => step.status === scan.status) : -1;
   const terminal = scan ? (TERMINAL_STATUSES as readonly string[]).includes(scan.status) : false;
 
+  // Provider states come only from recorded runs — never invented for effect.
+  const providerStates = runs.reduce<Record<string, { done: number; failed: number; total: number }>>((acc, run) => {
+    const key = run.provider ?? "Unknown";
+    const entry = acc[key] ?? { done: 0, failed: 0, total: 0 };
+    entry.total += 1;
+    if (run.status === "succeeded" || run.status === "complete") entry.done += 1;
+    if (run.status === "failed") entry.failed += 1;
+    acc[key] = entry;
+    return acc;
+  }, {});
+
   return (
     <DashboardShell
-      title="Scan status"
-      description="Every stage writes evidence to your account, so the report can be recomputed and audited later."
+      title={scan?.status === "complete" ? "Your AIeometer is ready" : "Measuring your AI visibility"}
+      description="Each stage below reflects real progress on your scan — nothing is shown as done before it is."
       actions={
         terminal ? (
-          <Button asChild>
+          <Button asChild className="rounded-full px-6 hover-lift">
             <Link to="/reports/$scanId" params={{ scanId }}>
               Open report
             </Link>
@@ -82,14 +93,52 @@ function ScanStatusPage() {
                 </Badge>
               </div>
 
+              {scan.status === "complete" && scanQuery.data?.score ? (
+                <div className="mt-8 flex justify-center border-b border-border pb-8">
+                  <Meter
+                    score={
+                      scanQuery.data.score.visibility_score == null
+                        ? null
+                        : Number(scanQuery.data.score.visibility_score)
+                    }
+                    label="AI Visibility"
+                    size="md"
+                    signals
+                  />
+                </div>
+              ) : null}
+
+              {Object.keys(providerStates).length > 0 ? (
+                <div className="mt-8 flex flex-wrap gap-2.5">
+                  {Object.entries(providerStates).map(([provider, state]) => (
+                    <ProviderChip
+                      key={provider}
+                      name={provider}
+                      state={state.done + state.failed >= state.total ? "done" : "searching"}
+                      note={`${state.done}/${state.total} recorded${state.failed ? ` · ${state.failed} failed` : ""}`}
+                    />
+                  ))}
+                </div>
+              ) : null}
+
               <ol className="mt-8 space-y-1">
                 {SCAN_STEPS.map((step, index) => {
                   const done = currentIndex > index || scan.status === "complete";
                   const active = currentIndex === index && !terminal;
                   return (
-                    <li key={step.status} className="flex items-center gap-3 rounded-lg px-3 py-2.5">
+                    <li
+                      key={step.status}
+                      className={cn(
+                        "flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors",
+                        active && "bg-accent/60",
+                      )}
+                    >
                       {done ? (
-                        <Check className="h-4 w-4 text-success" aria-hidden="true" />
+                        <Check
+                          className="h-4 w-4 text-success"
+                          style={{ animation: "var(--animate-pop)" }}
+                          aria-hidden="true"
+                        />
                       ) : active ? (
                         <Loader2 className="h-4 w-4 animate-spin text-primary" aria-hidden="true" />
                       ) : (
@@ -103,10 +152,12 @@ function ScanStatusPage() {
                       >
                         {step.label}
                       </span>
+                      <span className="sr-only">{done ? "complete" : active ? "in progress" : "pending"}</span>
                     </li>
                   );
                 })}
               </ol>
+
 
               {scan.status === "partial" ? (
                 <div className="mt-6 flex gap-3 rounded-lg border border-warning/40 bg-warning/10 p-4 text-sm text-ink">
