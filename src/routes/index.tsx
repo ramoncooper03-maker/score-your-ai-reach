@@ -3,7 +3,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Check,
-  FileSearch,
   MapPin,
   MessageCircle,
   Quote,
