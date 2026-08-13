@@ -178,6 +178,13 @@
   --score-strong: oklch(0.58 0.13 200);
   --score-leading: oklch(0.55 0.13 158);
 
+  --brand-signal: oklch(0.62 0.17 245);
+  --brand-mint: oklch(0.7 0.14 172);
+  --brand-coral: oklch(0.68 0.17 28);
+  --brand-amber: oklch(0.79 0.14 82);
+  --brand-violet: oklch(0.6 0.18 295);
+
+
   --chart-1: oklch(0.47 0.16 268);
   --chart-2: oklch(0.62 0.11 250);
   --chart-3: oklch(0.72 0.07 258);
