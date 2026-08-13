@@ -211,7 +211,7 @@ function LandingPage() {
       {/* SECTION 1 — hero */}
       <section className="relative overflow-hidden">
         <div
-          className="aurora pointer-events-none absolute inset-0 opacity-70"
+          className="aurora pointer-events-none absolute inset-0 opacity-90"
           aria-hidden="true"
         />
         <div
@@ -707,7 +707,11 @@ function Chapter({
       id={id}
       className={cn(
         "scroll-mt-20",
-        surface ? "border-y border-border bg-surface" : "bg-background",
+        surface
+          ? "border-y border-border/70 wash-sky"
+          : Number(number) % 2 === 0
+            ? "wash-blush"
+            : "wash-mint",
       )}
     >
       <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:py-24">
