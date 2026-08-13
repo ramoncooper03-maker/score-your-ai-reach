@@ -96,7 +96,7 @@ function PricingPage() {
               Pricing
             </span>
             <h1 className="mt-5 text-4xl font-semibold leading-[1.05] text-ink sm:text-5xl lg:text-6xl">
-              Start free. Go deeper when you’re ready.
+              Simple pricing. Full picture.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-ink-soft">
               Pay for measurement, not promises. Every tier uses the same standardized tests and the
@@ -104,7 +104,7 @@ function PricingPage() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-start">
+          <div className="mt-14 grid gap-6 lg:grid-cols-2 lg:items-start">
             {PLANS.map((plan, index) => (
               <Reveal key={plan.name} delay={index * 90}>
                 <div
