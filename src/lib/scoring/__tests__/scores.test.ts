@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { calculateVisibilityScore, consistencyAcrossProviders, prominenceForRun, shareOfVoiceTable, visibilityByProvider } from "../visibility";
+import {
+  calculateVisibilityScore,
+  consistencyAcrossProviders,
+  prominenceForRun,
+  shareOfVoiceTable,
+  visibilityByProvider,
+} from "../visibility";
 import { calculateReadinessScore, scoreBand } from "../readiness";
 import { READINESS_DIMENSIONS, VISIBILITY_WEIGHTS, type RunEvidence } from "../types";
 
@@ -60,7 +66,10 @@ describe("calculateVisibilityScore", () => {
   });
 
   it("scores an invisible business at 0", () => {
-    const runs = [run({ competitorKeys: ["acme plumbing"] }), run({ runId: "r2", competitorKeys: ["bright plumbing"] })];
+    const runs = [
+      run({ competitorKeys: ["acme plumbing"] }),
+      run({ runId: "r2", competitorKeys: ["bright plumbing"] }),
+    ];
     const result = calculateVisibilityScore(runs);
     expect(result.score).toBe(0);
     expect(result.insufficientEvidence).toBe(false);
@@ -68,8 +77,21 @@ describe("calculateVisibilityScore", () => {
 
   it("is deterministic and order-independent", () => {
     const runs = [
-      run({ runId: "a", targetMentioned: true, targetRecommended: true, targetListPosition: 2, targetListLength: 4, competitorKeys: ["x co"] }),
-      run({ runId: "b", queryId: "q2", provider: "provider-b", targetMentioned: true, competitorKeys: ["x co", "y co"] }),
+      run({
+        runId: "a",
+        targetMentioned: true,
+        targetRecommended: true,
+        targetListPosition: 2,
+        targetListLength: 4,
+        competitorKeys: ["x co"],
+      }),
+      run({
+        runId: "b",
+        queryId: "q2",
+        provider: "provider-b",
+        targetMentioned: true,
+        competitorKeys: ["x co", "y co"],
+      }),
       run({ runId: "c", queryId: "q3", provider: "provider-b", status: "failed" }),
     ];
     const first = calculateVisibilityScore(runs);
@@ -80,7 +102,15 @@ describe("calculateVisibilityScore", () => {
 
   it("computes each component from evidence", () => {
     const runs = [
-      run({ runId: "a", targetMentioned: true, targetRecommended: true, targetListPosition: 1, targetListLength: 2, ownedDomainCited: true, competitorKeys: ["rival one"] }),
+      run({
+        runId: "a",
+        targetMentioned: true,
+        targetRecommended: true,
+        targetListPosition: 1,
+        targetListLength: 2,
+        ownedDomainCited: true,
+        competitorKeys: ["rival one"],
+      }),
       run({ runId: "b", queryId: "q2", targetMentioned: true, competitorKeys: ["rival one"] }),
       run({ runId: "c", queryId: "q3", competitorKeys: ["rival one", "rival two"] }),
       run({ runId: "d", queryId: "q4", competitorKeys: [] }),
@@ -110,7 +140,10 @@ describe("calculateVisibilityScore", () => {
   });
 
   it("does not treat a fully failed scan as a zero score", () => {
-    const result = calculateVisibilityScore([run({ status: "failed" }), run({ runId: "b", status: "timeout" })]);
+    const result = calculateVisibilityScore([
+      run({ status: "failed" }),
+      run({ runId: "b", status: "timeout" }),
+    ]);
     expect(result.insufficientEvidence).toBe(true);
     expect(result.coverage.partial).toBe(false);
   });
@@ -118,8 +151,12 @@ describe("calculateVisibilityScore", () => {
 
 describe("prominenceForRun", () => {
   it("scores top of list 1 and bottom 0", () => {
-    expect(prominenceForRun(run({ targetMentioned: true, targetListPosition: 1, targetListLength: 5 }))).toBe(1);
-    expect(prominenceForRun(run({ targetMentioned: true, targetListPosition: 5, targetListLength: 5 }))).toBe(0);
+    expect(
+      prominenceForRun(run({ targetMentioned: true, targetListPosition: 1, targetListLength: 5 })),
+    ).toBe(1);
+    expect(
+      prominenceForRun(run({ targetMentioned: true, targetListPosition: 5, targetListLength: 5 })),
+    ).toBe(0);
   });
 
   it("scores unranked mentions 0.5 and absent mentions 0", () => {
@@ -128,8 +165,12 @@ describe("prominenceForRun", () => {
   });
 
   it("clamps out-of-range positions", () => {
-    expect(prominenceForRun(run({ targetMentioned: true, targetListPosition: 99, targetListLength: 3 }))).toBe(0);
-    expect(prominenceForRun(run({ targetMentioned: true, targetListPosition: 0, targetListLength: 3 }))).toBe(1);
+    expect(
+      prominenceForRun(run({ targetMentioned: true, targetListPosition: 99, targetListLength: 3 })),
+    ).toBe(0);
+    expect(
+      prominenceForRun(run({ targetMentioned: true, targetListPosition: 0, targetListLength: 3 })),
+    ).toBe(1);
   });
 });
 
@@ -196,7 +237,9 @@ describe("calculateReadinessScore", () => {
 
   it("clamps invalid values", () => {
     expect(calculateReadinessScore({ entityClarity: 5, trustEvidence: -3 }).score).toBe(20);
-    expect(calculateReadinessScore({ entityClarity: Number.NaN }).unevaluated).toContain("entityClarity");
+    expect(calculateReadinessScore({ entityClarity: Number.NaN }).unevaluated).toContain(
+      "entityClarity",
+    );
   });
 
   it("is independent of the visibility score", () => {

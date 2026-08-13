@@ -16,9 +16,12 @@ import { validateWebsiteUrl } from "@/lib/security/url";
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
     meta: [
-      { title: "Add your business — AIEO Meter" },
-      { name: "description", content: "Tell us about your business so we can build its standardized AI discovery tests." },
-      { property: "og:title", content: "Add your business — AIEO Meter" },
+      { title: "Add your business — AIeometer" },
+      {
+        name: "description",
+        content: "Tell us about your business so we can build its standardized AI discovery tests.",
+      },
+      { property: "og:title", content: "Add your business — AIeometer" },
       { property: "og:description", content: "Business intake for AI visibility measurement." },
       { name: "robots", content: "noindex" },
     ],
@@ -77,14 +80,17 @@ function OnboardingPage() {
           phone: input.phone,
         },
       });
-      const scan = await requestScan({ data: { businessId: business.businessId, scanType: "standard" } });
+      const scan = await requestScan({
+        data: { businessId: business.businessId, scanType: "standard" },
+      });
       return scan;
     },
     onSuccess: (scan) => {
       toast.success("Business saved. Scan queued.");
       void navigate({ to: "/scans/$scanId", params: { scanId: scan.scanId } });
     },
-    onError: (error) => toast.error(error instanceof Error ? error.message : "Could not save this business."),
+    onError: (error) =>
+      toast.error(error instanceof Error ? error.message : "Could not save this business."),
   });
 
   function update(key: keyof FormState, value: string) {
@@ -102,7 +108,8 @@ function OnboardingPage() {
     if (!form.category.trim()) nextErrors.category = "Enter your business category.";
     if (!form.city.trim()) nextErrors.city = "Enter your city.";
     if (!form.state.trim()) nextErrors.state = "Enter your state.";
-    if (splitList(form.services).length === 0) nextErrors.services = "List at least one primary service.";
+    if (splitList(form.services).length === 0)
+      nextErrors.services = "List at least one primary service.";
 
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
@@ -119,23 +126,53 @@ function OnboardingPage() {
           <CardContent className="p-8">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <Field label="Business name" error={errors.name} htmlFor="name">
-                <Input id="name" value={form.name} onChange={(event) => update("name", event.target.value)} placeholder="Rapid Plumbing" />
+                <Input
+                  id="name"
+                  value={form.name}
+                  onChange={(event) => update("name", event.target.value)}
+                  placeholder="Rapid Plumbing"
+                />
               </Field>
 
-              <Field label="Website" error={errors.website} htmlFor="website" hint="Public https address. Internal or private addresses are rejected.">
-                <Input id="website" value={form.website} onChange={(event) => update("website", event.target.value)} placeholder="rapidplumbing.com" />
+              <Field
+                label="Website"
+                error={errors.website}
+                htmlFor="website"
+                hint="Public https address. Internal or private addresses are rejected."
+              >
+                <Input
+                  id="website"
+                  value={form.website}
+                  onChange={(event) => update("website", event.target.value)}
+                  placeholder="rapidplumbing.com"
+                />
               </Field>
 
               <Field label="Business category" error={errors.category} htmlFor="category">
-                <Input id="category" value={form.category} onChange={(event) => update("category", event.target.value)} placeholder="plumber" />
+                <Input
+                  id="category"
+                  value={form.category}
+                  onChange={(event) => update("category", event.target.value)}
+                  placeholder="plumber"
+                />
               </Field>
 
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field label="City" error={errors.city} htmlFor="city">
-                  <Input id="city" value={form.city} onChange={(event) => update("city", event.target.value)} placeholder="Austin" />
+                  <Input
+                    id="city"
+                    value={form.city}
+                    onChange={(event) => update("city", event.target.value)}
+                    placeholder="Austin"
+                  />
                 </Field>
                 <Field label="State" error={errors.state} htmlFor="state">
-                  <Input id="state" value={form.state} onChange={(event) => update("state", event.target.value)} placeholder="TX" />
+                  <Input
+                    id="state"
+                    value={form.state}
+                    onChange={(event) => update("state", event.target.value)}
+                    placeholder="TX"
+                  />
                 </Field>
               </div>
 
@@ -154,7 +191,11 @@ function OnboardingPage() {
                 />
               </Field>
 
-              <Field label="Other names you go by" htmlFor="aliases" hint="Optional. Helps us recognise you in AI answers.">
+              <Field
+                label="Other names you go by"
+                htmlFor="aliases"
+                hint="Optional. Helps us recognise you in AI answers."
+              >
                 <Textarea
                   id="aliases"
                   rows={2}
@@ -164,8 +205,17 @@ function OnboardingPage() {
                 />
               </Field>
 
-              <Field label="Phone" htmlFor="phone" hint="Optional. Used for local consistency checks.">
-                <Input id="phone" value={form.phone} onChange={(event) => update("phone", event.target.value)} placeholder="(512) 555-0134" />
+              <Field
+                label="Phone"
+                htmlFor="phone"
+                hint="Optional. Used for local consistency checks."
+              >
+                <Input
+                  id="phone"
+                  value={form.phone}
+                  onChange={(event) => update("phone", event.target.value)}
+                  placeholder="(512) 555-0134"
+                />
               </Field>
 
               <Button type="submit" size="lg" disabled={mutation.isPending}>
@@ -177,7 +227,9 @@ function OnboardingPage() {
 
         <Card className="border-border/80 bg-surface">
           <CardContent className="p-7 text-sm leading-relaxed text-ink-soft">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">What happens next</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              What happens next
+            </h2>
             <ol className="mt-5 space-y-4">
               {[
                 "We validate your inputs and website address.",

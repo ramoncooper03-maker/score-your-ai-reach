@@ -14,10 +14,13 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — AIEO Meter" },
-      { name: "description", content: "Sign in or create your AIEO Meter account to measure your AI visibility." },
-      { property: "og:title", content: "Sign in — AIEO Meter" },
-      { property: "og:description", content: "Access your AIEO Meter dashboard and reports." },
+      { title: "Sign in — AIeometer" },
+      {
+        name: "description",
+        content: "Sign in or create your AIeometer account to measure your AI visibility.",
+      },
+      { property: "og:title", content: "Sign in — AIeometer" },
+      { property: "og:description", content: "Access your AIeometer dashboard and reports." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -87,12 +90,13 @@ function AuthPage() {
         <div className="max-w-md">
           <h1 className="text-3xl font-semibold text-ink">Measurement, not marketing claims</h1>
           <p className="mt-5 text-sm leading-relaxed text-ink-soft">
-            Standardized buyer-intent tests across multiple web-grounded AI engines, deterministic scoring in code, and
-            the raw evidence retained behind every number.
+            Standardized buyer-intent tests across multiple web-grounded AI engines, deterministic
+            scoring in code, and the raw evidence retained behind every number.
           </p>
         </div>
         <p className="text-xs text-muted-foreground">
-          AI answers vary. AIEO Meter reports what standardized tests observed — never a permanent ranking.
+          AI answers vary. AIeometer reports what standardized tests observed — never a permanent
+          ranking.
         </p>
       </div>
 
@@ -106,10 +110,17 @@ function AuthPage() {
               {mode === "signin" ? "Sign in" : "Create your account"}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              {mode === "signin" ? "Access your dashboard and reports." : "Start with one business, add more later."}
+              {mode === "signin"
+                ? "Access your dashboard and reports."
+                : "Start with one business, add more later."}
             </p>
 
-            <Button variant="outline" className="mt-7 w-full" onClick={() => void handleGoogle()} disabled={busy}>
+            <Button
+              variant="outline"
+              className="mt-7 w-full"
+              onClick={() => void handleGoogle()}
+              disabled={busy}
+            >
               Continue with Google
             </Button>
 
@@ -123,7 +134,12 @@ function AuthPage() {
               {mode === "signup" ? (
                 <div className="space-y-2">
                   <Label htmlFor="fullName">Your name</Label>
-                  <Input id="fullName" value={fullName} onChange={(event) => setFullName(event.target.value)} autoComplete="name" />
+                  <Input
+                    id="fullName"
+                    value={fullName}
+                    onChange={(event) => setFullName(event.target.value)}
+                    autoComplete="name"
+                  />
                 </div>
               ) : null}
               <div className="space-y-2">

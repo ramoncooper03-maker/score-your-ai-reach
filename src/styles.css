@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * AIEO Meter design system.
+ * AIeometer design system.
  *
  * Premium analytical SaaS: white surfaces, charcoal type, one restrained
  * indigo accent, generous spacing. The score is the hero visual.
@@ -73,17 +73,75 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  --color-brand-signal: var(--brand-signal);
+  --color-brand-mint: var(--brand-mint);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-violet: var(--brand-violet);
+
   --shadow-card: 0 1px 2px oklch(0.21 0.02 265 / 0.04), 0 8px 24px -12px oklch(0.21 0.02 265 / 0.12);
   --shadow-lift: 0 2px 4px oklch(0.21 0.02 265 / 0.05), 0 24px 48px -24px oklch(0.21 0.02 265 / 0.18);
+  --shadow-halo: 0 30px 90px -40px oklch(0.47 0.16 268 / 0.45);
   --tracking-display: -0.03em;
+
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-halo: halo 2.6s ease-out infinite;
+  --animate-pop: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes halo {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 
 :root {
   --radius: 0.75rem;
 
-  --background: oklch(1 0 0);
+  --background: oklch(0.995 0.004 85);
   --foreground: oklch(0.22 0.015 265);
-  --surface: oklch(0.985 0.003 265);
+  --surface: oklch(0.975 0.007 85);
+
   --surface-foreground: oklch(0.22 0.015 265);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.22 0.015 265);
@@ -119,6 +177,13 @@
   --score-developing: oklch(0.72 0.14 85);
   --score-strong: oklch(0.58 0.13 200);
   --score-leading: oklch(0.55 0.13 158);
+
+  --brand-signal: oklch(0.62 0.17 245);
+  --brand-mint: oklch(0.7 0.14 172);
+  --brand-coral: oklch(0.68 0.17 28);
+  --brand-amber: oklch(0.79 0.14 82);
+  --brand-violet: oklch(0.6 0.18 295);
+
 
   --chart-1: oklch(0.47 0.16 268);
   --chart-2: oklch(0.62 0.11 250);
@@ -210,4 +275,74 @@
 
 @utility section {
   padding-block: 5rem;
+}
+
+/* --- AIeometer motion + surface language ------------------------------- */
+
+/* Scroll reveal: hidden until the observer adds .is-visible. */
+@utility reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility soft-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-3xl);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@utility hover-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    transform: translate3d(0, -4px, 0);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Warm, bright ambient wash used behind hero and score moments. */
+@utility aurora {
+  background-image:
+    radial-gradient(48rem 30rem at 12% -10%, color-mix(in oklab, var(--brand-signal) 22%, transparent), transparent 70%),
+    radial-gradient(42rem 26rem at 88% 0%, color-mix(in oklab, var(--brand-mint) 20%, transparent), transparent 70%),
+    radial-gradient(38rem 24rem at 60% 100%, color-mix(in oklab, var(--brand-amber) 18%, transparent), transparent 70%);
+}
+
+@utility chapter-number {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--color-muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

@@ -14,7 +14,7 @@ export function SiteHeader() {
   const { session } = useAuth();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
         <Wordmark />
         <nav className="hidden items-center gap-8 md:flex">
@@ -31,12 +31,12 @@ export function SiteHeader() {
         </nav>
         <div className="flex items-center gap-2">
           {session ? (
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="rounded-full px-5 hover-lift">
               <Link to="/dashboard">Dashboard</Link>
             </Button>
           ) : (
-            <Button asChild size="sm">
-              <Link to="/auth">Check My Business</Link>
+            <Button asChild size="sm" className="rounded-full px-5 hover-lift">
+              <Link to="/auth">Check My AI Visibility</Link>
             </Button>
           )}
         </div>
@@ -53,7 +53,8 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <Wordmark />
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Measurement for AI-powered local discovery. Standardized tests, deterministic scoring, auditable evidence.
+              Measurement for AI-powered local discovery. Standardized tests, deterministic scoring,
+              auditable evidence.
             </p>
           </div>
           <nav className="grid grid-cols-2 gap-x-12 gap-y-3 text-sm">
@@ -72,7 +73,7 @@ export function SiteFooter() {
           {VARIABILITY_DISCLOSURE}
         </p>
         <p className="mt-4 text-xs text-muted-foreground">
-          © {new Date().getFullYear()} AIEO Meter. Not affiliated with any AI provider.
+          © {new Date().getFullYear()} AIeometer. Not affiliated with any AI provider.
         </p>
       </div>
     </footer>

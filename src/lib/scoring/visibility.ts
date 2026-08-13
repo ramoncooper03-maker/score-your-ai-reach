@@ -68,7 +68,10 @@ export function calculateVisibilityScore(runs: readonly RunEvidence[]): Visibili
   const mentionedRuns = scored.filter((run) => run.targetMentioned);
 
   const targetMentions = mentionedRuns.length;
-  const competitorMentions = scored.reduce((total, run) => total + new Set(run.competitorKeys).size, 0);
+  const competitorMentions = scored.reduce(
+    (total, run) => total + new Set(run.competitorKeys).size,
+    0,
+  );
 
   const prominenceValues = mentionedRuns.map(prominenceForRun);
   const prominence =
@@ -95,7 +98,10 @@ export function calculateVisibilityScore(runs: readonly RunEvidence[]): Visibili
     };
   });
 
-  const rawScore = breakdown.reduce((sum, item) => sum + components[item.key] * item.weight * 100, 0);
+  const rawScore = breakdown.reduce(
+    (sum, item) => sum + components[item.key] * item.weight * 100,
+    0,
+  );
 
   const providersScored = [...new Set(scored.map((run) => run.provider))].sort();
   const providersFailed = [...new Set(failed.map((run) => run.provider))].sort();
@@ -120,7 +126,9 @@ export function calculateVisibilityScore(runs: readonly RunEvidence[]): Visibili
 }
 
 /** Per-provider visibility breakdown for the report's engine section. */
-export function visibilityByProvider(runs: readonly RunEvidence[]): Array<{ provider: string; result: VisibilityResult }> {
+export function visibilityByProvider(
+  runs: readonly RunEvidence[],
+): Array<{ provider: string; result: VisibilityResult }> {
   const providers = [...new Set(runs.map((run) => run.provider))].sort();
   return providers.map((provider) => ({
     provider,

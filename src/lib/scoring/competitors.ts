@@ -35,7 +35,11 @@ export function findEntityMention(text: string, entity: NamedEntity): MentionMat
   if (haystack.trim() === "") return null;
 
   let best: MentionMatch | null = null;
-  for (const aliasKey of buildAliasKeys(entity.name, entity.aliases ?? [], entity.website ?? null)) {
+  for (const aliasKey of buildAliasKeys(
+    entity.name,
+    entity.aliases ?? [],
+    entity.website ?? null,
+  )) {
     if (aliasKey.length < 3) continue;
     const index = haystack.indexOf(` ${aliasKey} `);
     if (index === -1) continue;
@@ -98,8 +102,13 @@ export function extractRankedList(answerText: string): ExtractedListItem[] {
  * Given a ranked list and the target entity, return the target's 1-indexed
  * position, or null when absent.
  */
-export function findListPosition(items: readonly ExtractedListItem[], entity: NamedEntity): number | null {
-  const aliasKeys = new Set(buildAliasKeys(entity.name, entity.aliases ?? [], entity.website ?? null));
+export function findListPosition(
+  items: readonly ExtractedListItem[],
+  entity: NamedEntity,
+): number | null {
+  const aliasKeys = new Set(
+    buildAliasKeys(entity.name, entity.aliases ?? [], entity.website ?? null),
+  );
   for (const item of items) {
     if (aliasKeys.has(item.key)) return item.position;
   }
@@ -107,7 +116,12 @@ export function findListPosition(items: readonly ExtractedListItem[], entity: Na
 }
 
 /** Competitor candidates = ranked list entries that are not the target entity. */
-export function competitorCandidates(items: readonly ExtractedListItem[], target: NamedEntity): ExtractedListItem[] {
-  const aliasKeys = new Set(buildAliasKeys(target.name, target.aliases ?? [], target.website ?? null));
+export function competitorCandidates(
+  items: readonly ExtractedListItem[],
+  target: NamedEntity,
+): ExtractedListItem[] {
+  const aliasKeys = new Set(
+    buildAliasKeys(target.name, target.aliases ?? [], target.website ?? null),
+  );
   return items.filter((item) => !aliasKeys.has(item.key));
 }

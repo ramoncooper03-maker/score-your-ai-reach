@@ -81,7 +81,12 @@ describe("sanitization", () => {
 });
 
 describe("buildStandardQueries", () => {
-  const input = { category: "plumber", city: "Austin", state: "TX", primaryServices: ["drain cleaning", "water heaters", "repiping", "extra"] };
+  const input = {
+    category: "plumber",
+    city: "Austin",
+    state: "TX",
+    primaryServices: ["drain cleaning", "water heaters", "repiping", "extra"],
+  };
 
   it("is deterministic and caps services", () => {
     const first = buildStandardQueries(input);

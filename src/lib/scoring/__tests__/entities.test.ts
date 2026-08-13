@@ -1,7 +1,19 @@
 import { describe, expect, it } from "vitest";
 
-import { buildAliasKeys, isSameEntity, mergeEntities, normalizeEntityName, normalizeHost } from "../normalize";
-import { competitorCandidates, extractRankedList, findEntityMention, findListPosition, isEntityMentioned } from "../competitors";
+import {
+  buildAliasKeys,
+  isSameEntity,
+  mergeEntities,
+  normalizeEntityName,
+  normalizeHost,
+} from "../normalize";
+import {
+  competitorCandidates,
+  extractRankedList,
+  findEntityMention,
+  findListPosition,
+  isEntityMentioned,
+} from "../competitors";
 
 describe("normalizeEntityName", () => {
   it("lowercases and strips punctuation", () => {
@@ -38,11 +50,9 @@ describe("normalizeHost", () => {
 
 describe("buildAliasKeys", () => {
   it("includes name, aliases and the domain label", () => {
-    expect(buildAliasKeys("Rapid Plumbing LLC", ["Rapid Plumbing & Drain"], "https://rapidplumb.com")).toEqual([
-      "rapid plumbing",
-      "rapid plumbing and drain",
-      "rapidplumb",
-    ]);
+    expect(
+      buildAliasKeys("Rapid Plumbing LLC", ["Rapid Plumbing & Drain"], "https://rapidplumb.com"),
+    ).toEqual(["rapid plumbing", "rapid plumbing and drain", "rapidplumb"]);
   });
 
   it("deduplicates equivalent spellings", () => {
@@ -78,10 +88,16 @@ describe("mergeEntities", () => {
 });
 
 describe("mention detection", () => {
-  const target = { name: "Rapid Plumbing", aliases: ["Rapid Plumbing & Drain"], website: "https://rapidplumb.com" };
+  const target = {
+    name: "Rapid Plumbing",
+    aliases: ["Rapid Plumbing & Drain"],
+    website: "https://rapidplumb.com",
+  };
 
   it("matches whole tokens only", () => {
-    expect(isEntityMentioned("You could try Rapid Plumbing, they are reliable.", target)).toBe(true);
+    expect(isEntityMentioned("You could try Rapid Plumbing, they are reliable.", target)).toBe(
+      true,
+    );
     expect(isEntityMentioned("Try Rapids Plumbingly instead", target)).toBe(false);
   });
 
